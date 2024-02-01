@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+.hero-section {
+  height: 62dvh;
+  width: 100%;
+  background-image: linear-gradient(rgba(96, 118, 143, 0.5), rgba(80, 79, 141, 0.5)),
+    url(../src/assets/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
+
+
+
+.banner{
+   height: 50vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(229, 228, 233, 0.5), rgba(148, 148, 197, 0.5)),
+    url(../src/assets/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:bottom;
+}
