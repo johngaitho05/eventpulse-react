@@ -2,8 +2,10 @@ import React from 'react';
 
 import wave6 from '../assets/wave6.svg';
 import { heros } from '../Data/links';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <div className="relative w-full hero-section z-0 mx-auto  h-[30dvh] lg:h-[63dvh]">
@@ -16,10 +18,16 @@ const Hero = () => {
                     <h1 className="text-xl font-medium text-[#44375f] max-w-[350px] pr-5 text-center">
                         Discover and Engage with Exciting Events in Your Area
                     </h1>
-                    <button className="bg-primary font-medium py-3  w-[200px] text-white">
+                    <button
+                        className="bg-primary font-medium py-3  w-[200px] text-white"
+                        onClick={() => navigate('/events')}
+                    >
                         Find your next event
                     </button>
-                    <button className="w-[200px] font-medium text-gray-700 py-3 px-5 border-2 border-primary">
+                    <button
+                        className="w-[200px] font-medium text-gray-700 py-3 px-5 border-2 border-primary "
+                        onClick={() => navigate('/new-event')}
+                    >
                         Publish an Event
                     </button>
                 </div>

@@ -13,7 +13,7 @@ export const links = [
     {
         name: 'create events',
         icon: FilePenLine,
-        link: '/events',
+        link: '/new-event',
     },
     {
         name: 'login',
