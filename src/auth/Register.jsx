@@ -1,5 +1,5 @@
 import React from 'react';
-import image from '../assets/bg.jpg';
+import image from '../assets/clap.jpg';
 import RegistrationForm from './RegisterForm';
 
 const Auth = () => {

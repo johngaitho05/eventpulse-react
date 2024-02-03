@@ -18,11 +18,11 @@
 .banner{
    height: 50vh;
   width: 100%;
-  background-image: linear-gradient(rgba(229, 228, 233, 0.5), rgba(148, 148, 197, 0.5)),
-    url(../src/assets/bg.jpg);
+  background-image: 
+    url(../src/assets/clap.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position:bottom;
+  background-position:center;
 }
 
 .auth{

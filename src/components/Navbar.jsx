@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { AlignJustify, X } from 'lucide-react';
 import { links } from '../Data/links';
@@ -8,6 +8,7 @@ const Header = () => {
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,12 +27,15 @@ const Header = () => {
 
     return (
         <div
-            className={` w-full fixed top-0 left-0 z-20 ${scrolled ? 'bg-[#050816]' : ''}  ${
-                open ? 'bg-[#050816] lg:bg-transparent' : 'bg-transparent'
-            }`}
+            className={` w-full fixed top-0 left-0 z-20 ${
+                scrolled ? 'bg-[#050816]' : 'bg-transparent]'
+            }  ${open ? 'bg-[#050816] lg:bg-transparent' : ' lg:bg-transparent'}`}
         >
             <div className="md:flex items-center justify-between  py-4 md:px-10 px-7 ">
-                <div className="font-bold text-2xl cursor-pointer flex items-center gap-1">
+                <div
+                    className="font-bold text-2xl cursor-pointer flex items-center gap-1"
+                    onClick={() => navigate('/')}
+                >
                     <img src={Logo} alt="" className="w-[50px] h-[50px]" />
                     <span className="text-white-100 font-bold">𝔈𝔳𝔢𝔫𝔱 𝔭𝔲𝔩𝔰𝔢</span>
                 </div>
