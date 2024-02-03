@@ -8,14 +8,17 @@ export const links = [
     {
         name: 'find events',
         icon: Search,
+        link: '/events',
     },
     {
         name: 'create events',
         icon: FilePenLine,
+        link: '/events',
     },
     {
         name: 'login',
         icon: User,
+        link: '/login',
     },
 ];
 
