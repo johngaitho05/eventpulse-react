@@ -5,6 +5,7 @@ import Hero from './components/hero';
 import Events from './components/Events';
 import Auth from './auth/Login';
 import Register from './auth/Register';
+import EventDetails from './components/EventDetails';
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                 <Events />
                 <Auth />
                 <Register />
+                <EventDetails />
             </BrowserRouter>
         </div>
     );

@@ -27,9 +27,18 @@
 }
 
 .auth{
-  background-image: linear-gradient(rgba(229, 228, 233, 0.5), rgba(148, 148, 197, 0.5)),
+  background-image: linear-gradient(rgba(70, 28, 236, 0.5), rgba(148, 148, 197, 0.5)),
   url(../src/assets/bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position:bottom;
+}
+
+.events-header{
+  height: 40vh;
+  background-image: linear-gradient(rgba(15, 14, 15, 0.719), rgba(85, 63, 212, 0.582)),
+  url('https://images.pexels.com/photos/2747446/pexels-photo-2747446.jpeg?auto=compress&cs=tinysrgb&w=600');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:center;
 }

@@ -6,13 +6,13 @@ import { heros } from '../Data/links';
 const Hero = () => {
     return (
         <div>
-            <div className="relative w-full hero-section z-0">
+            <div className="relative w-full hero-section z-0 mx-auto">
                 <div className="absolute w-full bottom-0 left-0 right-0 z-0 wavy ">
                     <img src={wave6} alt="" className="w-full object-cover mb-[-10px] z-0" />
                 </div>
             </div>
-            <div className="flex flex-col items-center md:flex-row  relative top-[10vw] sm:top-[5vw] md:top-[-5vw]">
-                <div className="w-full flex flex-col justify-center items-center md:items-start md:justify-start  px-5 sm:px-24 gap-6 md:mt-[-150px]">
+            <div className="flex flex-col items-center md:flex-row  relative top-[10vw] sm:top-[5vw] md:top-[-5vw] mx-5 sm:mx-10 md:mx-24">
+                <div className="w-full flex flex-col justify-center items-center md:items-start md:justify-start   gap-6 lg:mt-[-150px]">
                     <h1 className="text-xl font-medium text-[#44375f] max-w-[350px] pr-5">
                         Discover and Engage with Exciting Events in Your Area
                     </h1>
@@ -33,7 +33,7 @@ const Hero = () => {
                                 <hero.icon size="32" />
                             </div>
 
-                            <h2 className="text-lg tracking-wide text-center capitalize ">
+                            <h2 className="text-lg  tracking-wide text-center capitalize ">
                                 {hero.name}
                             </h2>
                         </div>
