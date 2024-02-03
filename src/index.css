@@ -6,7 +6,6 @@
 
 
 .hero-section {
-  height: 62dvh;
   width: 100%;
   background-image: linear-gradient(rgba(96, 118, 143, 0.5), rgba(80, 79, 141, 0.5)),
     url(../src/assets/bg.jpg);
@@ -41,4 +40,23 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position:center;
+}
+
+
+@layer utilities {
+  @variants responsive {
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+  }
 }

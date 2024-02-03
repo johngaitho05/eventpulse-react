@@ -6,14 +6,14 @@ import { heros } from '../Data/links';
 const Hero = () => {
     return (
         <div>
-            <div className="relative w-full hero-section z-0 mx-auto">
+            <div className="relative w-full hero-section z-0 mx-auto  h-[30dvh] lg:h-[63dvh]">
                 <div className="absolute w-full bottom-0 left-0 right-0 z-0 wavy ">
                     <img src={wave6} alt="" className="w-full object-cover mb-[-10px] z-0" />
                 </div>
             </div>
             <div className="flex flex-col items-center md:flex-row  relative top-[10vw] sm:top-[5vw] md:top-[-5vw] mx-5 sm:mx-10 md:mx-24">
                 <div className="w-full flex flex-col justify-center items-center md:items-start md:justify-start   gap-6 lg:mt-[-150px]">
-                    <h1 className="text-xl font-medium text-[#44375f] max-w-[350px] pr-5">
+                    <h1 className="text-xl font-medium text-[#44375f] max-w-[350px] pr-5 text-center">
                         Discover and Engage with Exciting Events in Your Area
                     </h1>
                     <button className="bg-primary font-medium py-3  w-[200px] text-white">
@@ -40,7 +40,6 @@ const Hero = () => {
                     ))}
                 </div>
             </div>
-            ;
         </div>
     );
 };
