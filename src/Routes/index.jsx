@@ -7,6 +7,7 @@ import Register from '../pages/register';
 import Events from '../pages/events';
 import EventDetails from '../pages/evenDetails';
 import NewEvent from '../pages/NewEvent';
+import Footer from '../components/Footer'
 
 const Index = () => {
     return (
@@ -20,6 +21,7 @@ const Index = () => {
                 <Route path="/details/:id" element={<EventDetails />} />
                 <Route path="/new-event" element={<NewEvent />} />
             </Routes>
+            <Footer/>
         </div>
     );
 };
