@@ -6,7 +6,7 @@ const Event = ({ event }) => {
     const navigate = useNavigate();
     return (
         <div
-            className="max-w-[300px] text-sm border flex flex-col m-5 text-[#2f204e] "
+            className="max-w-[300px] text-sm border flex flex-col m-5 text-[#2f204e] cursor-pointer"
             onClick={() => navigate(`/events/${event.id}`)}
         >
             <img src={event.banner_url} alt="" className="w-full h-[200px] object-cover" />

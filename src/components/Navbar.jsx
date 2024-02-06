@@ -40,8 +40,8 @@ const Header = () => {
                     className="font-bold text-2xl cursor-pointer flex items-center gap-1"
                     onClick={() => navigate('/')}
                 >
-                    <img src={Logo} alt="" className="w-[50px] h-[50px]" />
-                    <span className="text-white-100 font-bold">𝔈𝔳𝔢𝔫𝔱 𝔭𝔲𝔩𝔰𝔢</span>
+                    <img src={Logo} alt="EventPulse" className="w-[180px]" />
+                    {/*<span className="text-white-100 font-bold ">Event Pulse</span>*/}
                 </div>
                 <div
                     onClick={() => setOpen(!open)}

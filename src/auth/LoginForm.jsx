@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo-sm.png';
 import google from '../assets/google.png';
 
 const LoginForm = () => {
@@ -33,7 +33,7 @@ const LoginForm = () => {
         <div className=" h-full px-4 w-full lg:w-[45%] flex flex-col items-center ">
             <div className="flex flex-col justify-center items-center">
                 <div>
-                    <img src={logo} alt="" className="h-24 object-cover" />
+                    <img src={logo} alt="" className="h-16 object-cover" />
                 </div>
                 <h2 className="font-bold text-2xl">Welcome Back</h2>
                 <p className="my-1 text-sm text-gray-700">
@@ -105,11 +105,12 @@ const LoginForm = () => {
                         <img src={google} alt="" className="h-6 mr-2" />
                         Sign in with Google
                     </button>
+                    Don't have an account?
                     <Link
                         to="/register"
-                        className="font-medium text-indigo-600 hover:text-indigo-500 text center mt-2"
+                        className="font-medium text-indigo-600 hover:text-indigo-500 text center mt-2 ml-2"
                     >
-                        Don't have an account? Register here
+                        Sign Up
                     </Link>
                 </div>
             </form>

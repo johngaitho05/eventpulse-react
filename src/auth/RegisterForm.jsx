@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { RiGoogleFill } from 'react-icons/ri';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo-sm.png';
 import google from '../assets/google.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'lucide-react';
 
 const RegistrationForm = () => {
-    const { isLoading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         name: '',
@@ -39,7 +38,7 @@ const RegistrationForm = () => {
         <div className=" h-auto lg:h-full px-4 w-full lg:w-[45%] flex flex-col items-center overflow-y-auto no-scrollbar ">
             <div className="flex flex-col justify-center items-center">
                 <div>
-                    <img src={logo} alt="" className="h-24 object-cover" />
+                    <img src={logo} alt="" className="h-16 object-cover" />
                 </div>
                 <h2 className="font-bold text-2xl">Welcome to Event Pulse</h2>
                 <p className="my-1 text-sm text-gray-700">
@@ -50,7 +49,6 @@ const RegistrationForm = () => {
                 onSubmit={handleSubmit}
                 className="w-full max-w-xl space-y-6 bg-white p-8 rounded-lg"
             >
-                {isLoading && <Loader />}
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                         Name
@@ -172,11 +170,11 @@ const RegistrationForm = () => {
                         <img src={google} alt="" className="h-6 mr-2" />
                         Sign in with Google
                     </button>
+                    Already have an account?
                     <Link
                         to="/login"
-                        className="font-medium text-indigo-600 hover:text-indigo-500 text center mt-2"
-                    >
-                        Already have an account? Login here
+                        className="font-medium text-indigo-600 hover:text-indigo-500 text center mt-2 ml-2"
+                    >Login here
                     </Link>
                 </div>
             </form>
