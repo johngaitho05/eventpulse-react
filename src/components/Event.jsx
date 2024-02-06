@@ -4,23 +4,22 @@ import { useNavigate } from 'react-router-dom';
 
 const Event = ({ event }) => {
     const navigate = useNavigate();
-    const { title, description, date, location, image } = event;
     return (
         <div
             className="max-w-[300px] text-sm border flex flex-col m-5 text-[#2f204e] "
             onClick={() => navigate(`/events/${event.id}`)}
         >
-            <img src={image} alt="" className="w-full h-[200px] object-cover" />
+            <img src={event.banner_url} alt="" className="w-full h-[200px] object-cover" />
             <div className="p-3 flex gap-5 flex-col">
-                <h2 className="font-medium text-xl">{title}</h2>
-                <p>{description}</p>
+                <h2 className="font-medium text-xl">{event.title}</h2>
+                <p className="line-clamp-4">{event.description}</p>
                 <span className="flex gap-3">
                     <CalendarDays size={18} />
-                    <p>{date}</p>
+                    <p>{event.start_date}</p>
                 </span>
                 <span className="flex gap-3">
                     <MapPin strokeWidth={3} />
-                    <p>{location}</p>
+                    <p>{event.venue_id.address}</p>
                 </span>
             </div>
         </div>

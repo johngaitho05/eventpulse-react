@@ -4,7 +4,6 @@ import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { RiGoogleFill } from 'react-icons/ri';
 import logo from '../assets/logo.png';
 import google from '../assets/google.png';
-import { RegisteringUser } from '../redux/slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'lucide-react';
 
@@ -32,7 +31,7 @@ const RegistrationForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(RegisteringUser(formData));
+        // dispatch(RegisteringUser(formData));
         console.log('Form Data:', formData);
     };
 
