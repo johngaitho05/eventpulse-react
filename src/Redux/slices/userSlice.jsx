@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { RegistrationOfUser, LogginOfUser, GetUserById } from '../apis/users.actions';
 
 const initialState = {
     user: null,
