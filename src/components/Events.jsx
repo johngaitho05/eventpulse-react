@@ -2,11 +2,16 @@ import React, {useEffect, useState} from 'react';
 import Event from './Event';
 import { Search } from 'lucide-react';
 import clap from '../assets/people.jpg';
-import {useGetEventsQuery} from "../redux/apis/eventAPI";
+import {useGetEventsQuery} from "../redux/apis/apiSlice.js";
 import EventLoader from '../globals/eventLoader'
 
 const Events = ({simplified, nosearch}) => {
-  let {data: eventsList, isFetching} = useGetEventsQuery()
+  let {
+    data: eventsList, isFetching, isSuccess,
+    isError,
+    error
+  } = useGetEventsQuery()
+
   const [events, setEvents] = useState(eventsList)
   const [searchTerm, setSearchTerm] = useState('');
 

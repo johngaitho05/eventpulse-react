@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import logo from '../assets/logo-sm.png';
 import google from '../assets/google.png';
+import {useLoginMutation} from "../redux/apis/apiSlice.js";
 
 const LoginForm = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
+    const [user, setUser] = useState(null)
     const [showPassword, setShowPassword] = useState(false);
 
     const handleInputChange = (e) => {
@@ -26,7 +28,6 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Login Form Data:', formData);
     };
 
     return (

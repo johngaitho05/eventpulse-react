@@ -2,7 +2,7 @@ import { CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
 import React, {useEffect, useState} from 'react';
 import {
   useGetEventDetailsQuery,
-} from "../redux/apis/eventAPI";
+} from "../redux/apis/apiSlice.js";
 
 import { EventHighlightLoader, EventContentLoader, EventOrganizerLoader } from '../globals/eventDetailsLoader'
 

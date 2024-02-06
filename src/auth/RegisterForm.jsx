@@ -30,7 +30,6 @@ const RegistrationForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // dispatch(RegisteringUser(formData));
         console.log('Form Data:', formData);
     };
 
