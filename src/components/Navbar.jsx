@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import { AlignJustify, X } from 'lucide-react';
+import { AlignJustify, X, User } from 'lucide-react';
 import { links } from '../Data/links';
+import { Select } from 'antd';
+import { FormControl } from '@mui/material';
+import MenuItem from 'antd/es/menu/MenuItem';
 
 const Header = () => {
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const user = '';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -66,14 +70,28 @@ const Header = () => {
                             </a>
                         </li>
                     ))}
-                    {/* <form action="" className="mt-4 lg:mt-0 relative lg:ml-4">
-                        <input
-                            type="text"
-                            className="border border-gray-300 rounded-md py-2 px-10 focus:outline-none focus:border-blue-500"
-                            placeholder="Search"
-                        />
-                        <Search className="absolute top-3 left-1 text-gray-500" />
-                    </form> */}
+                    <div className="w-[200px]">
+                        {user ? (
+                            <div>
+                                <FormControl fullWidth>
+                                    <Select
+                                        labelId="user-menu-label"
+                                        id="user-menu"
+                                        value={user}
+                                        label="Username"
+                                    >
+                                        <MenuItem value="dashboard">Dashboard</MenuItem>
+                                        <MenuItem value="logout">Logout</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        ) : (
+                            <div className="flex font-semibold gap-2">
+                                <User />
+                                <Link to={'/login'}> Login</Link>
+                            </div>
+                        )}
+                    </div>
                 </ul>
             </div>
         </div>

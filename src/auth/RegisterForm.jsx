@@ -4,8 +4,13 @@ import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { RiGoogleFill } from 'react-icons/ri';
 import logo from '../assets/logo.png';
 import google from '../assets/google.png';
+import { RegisteringUser } from '../Redux/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Loader } from 'lucide-react';
 
 const RegistrationForm = () => {
+    const { isLoading } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -25,10 +30,10 @@ const RegistrationForm = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        dispatch(RegisteringUser(formData));
         console.log('Form Data:', formData);
-        // Add your form submission logic here
     };
 
     return (
@@ -46,6 +51,7 @@ const RegistrationForm = () => {
                 onSubmit={handleSubmit}
                 className="w-full max-w-xl space-y-6 bg-white p-8 rounded-lg"
             >
+                {isLoading && <Loader />}
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                         Name

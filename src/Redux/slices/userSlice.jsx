@@ -6,8 +6,6 @@ const initialState = {
     user: null,
     isLoading: false,
     userToken: localStorage.getItem('userToken') || '',
-    theSeller: null,
-    sellers: [],
 };
 
 export const RegisteringUser = createAsyncThunk(
@@ -84,16 +82,7 @@ const authSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
-            .addCase(getLoggedInUser.pending, (state) => {
-                state.isLoading = true;
-            })
-            .addCase(getLoggedInUser.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.user = action.payload;
-            })
-            .addCase(getLoggedInUser.rejected, (state) => {
-                state.isLoading = false;
-            })
+
             .addCase(RegisteringUser.pending, (state) => {
                 state.isLoading = true;
             })
@@ -123,29 +112,6 @@ const authSlice = createSlice({
                 state.theSeller = action.payload;
             })
             .addCase(GettingUserById.rejected, (state) => {
-                state.isLoading = false;
-            })
-            .addCase(GettingSellers.pending, (state) => {
-                state.isLoading = true;
-            })
-            .addCase(GettingSellers.fulfilled, (state, action) => {
-                state.isLoading = false;
-                // Update state.user with the user data received in the action payload
-                state.sellers = action.payload; // Adjust this to match your response structure
-            })
-            .addCase(GettingSellers.rejected, (state) => {
-                state.isLoading = false;
-            })
-            .addCase(UpdattingOfUser.pending, (state) => {
-                state.isLoading = true;
-            })
-
-            .addCase(UpdattingOfUser.fulfilled, (state, action) => {
-                state.isLoading = false;
-                // Handle the fulfilled action here, e.g., update user data
-                state.user = action.payload;
-            })
-            .addCase(UpdattingOfUser.rejected, (state) => {
                 state.isLoading = false;
             });
     },

@@ -1,4 +1,4 @@
-import { Search, FilePenLine, User } from 'lucide-react';
+import { Search, FilePenLine } from 'lucide-react';
 import { PiMicrophoneStageLight } from 'react-icons/pi';
 import { FaPeopleGroup } from 'react-icons/fa6';
 import { LuCandlestickChart } from 'react-icons/lu';
@@ -14,11 +14,6 @@ export const links = [
         name: 'create events',
         icon: FilePenLine,
         link: '/new-event',
-    },
-    {
-        name: 'login',
-        icon: User,
-        link: '/login',
     },
 ];
 

@@ -23,10 +23,10 @@ const LoginForm = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         console.log('Login Form Data:', formData);
-        // Implement your login logic here
     };
 
     return (
