@@ -1,5 +1,6 @@
 const events = [
     {
+        id: "events1",
         title: 'Tech Innovation Summit',
         description:
             'Join us for a day of exploration into the latest technological innovations. Engage with industry leaders, attend insightful panels, and discover the future of technology.',
@@ -8,6 +9,7 @@ const events = [
         image: 'https://images.pexels.com/photos/9242823/pexels-photo-9242823.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     },
     {
+        id: "events2",
         title: 'Data Science Conference',
         description:
             'Explore the world of data science at our conference. Learn from experts, participate in hands-on workshops, and gain insights into the latest trends in data analytics.',
@@ -16,6 +18,7 @@ const events = [
         image: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
+        id: "events3",
         title: 'Future of AI Symposium',
         description:
             'Join thought leaders in artificial intelligence to discuss the future of AI. Dive into discussions on machine learning, ethics, and the impact of AI on various industries.',
@@ -24,6 +27,7 @@ const events = [
         image: 'https://images.pexels.com/photos/6696172/pexels-photo-6696172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     },
     {
+        id: "events4",
         title: 'Web Development Expo',
         description:
             'Calling all web developers! Attend our expo to explore the latest trends in web development. Learn about new frameworks, tools, and best practices.',

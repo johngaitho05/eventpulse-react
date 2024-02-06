@@ -1,6 +1,6 @@
 import React from 'react';
 import Event from './Event';
-import events from '../Data/events';
+import events from '../data/events';
 import { Search } from 'lucide-react';
 import clap from '../assets/people.jpg';
 

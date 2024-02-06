@@ -4,7 +4,7 @@ import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { RiGoogleFill } from 'react-icons/ri';
 import logo from '../assets/logo.png';
 import google from '../assets/google.png';
-import { RegisteringUser } from '../Redux/slices/userSlice';
+import { RegisteringUser } from '../redux/slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'lucide-react';
 
@@ -177,7 +177,7 @@ const RegistrationForm = () => {
                         to="/login"
                         className="font-medium text-indigo-600 hover:text-indigo-500 text center mt-2"
                     >
-                        Don't have an account? Login here
+                        Already have an account? Login here
                     </Link>
                 </div>
             </form>

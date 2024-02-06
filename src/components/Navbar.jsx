@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { AlignJustify, X, User } from 'lucide-react';
-import { links } from '../Data/links';
+import { links } from '../data/links';
 import { Select } from 'antd';
 import { FormControl } from '@mui/material';
 import MenuItem from 'antd/es/menu/MenuItem';

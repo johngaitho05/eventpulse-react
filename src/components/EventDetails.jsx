@@ -28,7 +28,7 @@ const eventData = {
     ],
 };
 
-const EventDetails = () => {
+const EventDetails = (eventId) => {
     return (
         <div>
             <div className="w-full flex flex-col sm:flex-row events-header  pt-20">

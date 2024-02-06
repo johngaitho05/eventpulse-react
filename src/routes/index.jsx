@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from '../components/Navbar';
 import Landing from '../pages/landing';
 import Login from '../pages/login';
@@ -18,7 +18,7 @@ const Index = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/events" element={<Events />} />
-                <Route path="/details/:id" element={<EventDetails />} />
+                <Route path="/events/:id" element={<EventDetails />} />
                 <Route path="/new-event" element={<NewEvent />} />
             </Routes>
             <Footer/>

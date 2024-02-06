@@ -8,7 +8,7 @@ const Event = ({ event }) => {
     return (
         <div
             className="max-w-[300px] text-sm border flex flex-col m-5 text-[#2f204e] "
-            onClick={() => navigate('/details/1')}
+            onClick={() => navigate(`/events/${event.id}`)}
         >
             <img src={image} alt="" className="w-full h-[200px] object-cover" />
             <div className="p-3 flex gap-5 flex-col">
