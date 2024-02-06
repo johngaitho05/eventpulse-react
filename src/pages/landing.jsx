@@ -7,7 +7,9 @@ const Landing = () => {
     <div>
       <Hero />
       <div>
-        <h2 className="ml-36">Upcoming Events</h2>
+        <h1 className="text-xl font-medium text-[#44375f] max-w-[350px] pr-5 leading-8 mb-4 ml-24">
+          Upcoming Events
+        </h1>
         <Events simplified={true} nosearch={true}/>
       </div>
     </div>

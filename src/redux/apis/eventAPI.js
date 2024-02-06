@@ -1,24 +1,9 @@
-import {createApi,fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-
-
-const eventsApiHeaders = {
-    'Content-Type': 'application/json',
-}
-const eventsApiFormHeaders = {
-    'Content-Type': 'multipart/form-data',
-}
-const baseUrl = 'https://events.johngaitho.info/api/v1'
-
-const createRequest = (url, method='GET', body={}) => {
-    let  req = {url, headers:eventsApiHeaders, method:method}
-    if (['POST', 'PUT'].indexOf(method) !== -1)
-        req.body = body
-    return req
-}
+import {createApi} from "@reduxjs/toolkit/query/react";
+import {baseQuery, createRequest} from "../helpers/request.js";
 
 export const eventAPI = createApi({
     reducerPath: 'eventsApi',
-    baseQuery: fetchBaseQuery({baseUrl}),
+    baseQuery: baseQuery,
     endpoints: (builder) => ({
         getEvents: builder.query({
             query: () => createRequest(`/events`)
