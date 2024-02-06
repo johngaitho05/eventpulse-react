@@ -1,18 +1,18 @@
 import { CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
 import React, {useEffect, useState} from 'react';
 import {
-  useGetEventDetailsQuery,
+  useGetEventDetailsQuery, useGetEventsQuery,
 } from "../redux/apis/apiSlice.js";
 
 import { EventHighlightLoader, EventContentLoader, EventOrganizerLoader } from '../globals/eventDetailsLoader'
 
 const Event = ({eventId}) => {
-  let {data: eventData, isFetching} = useGetEventDetailsQuery(eventId)
-  const [event, setEvent] = useState(eventData)
+  let {
+    data: event, isFetching, isSuccess,
+    isError,
+    error
+  } = useGetEventDetailsQuery(eventId)
 
-  useEffect(() => {
-    setEvent(eventData);
-  }, [eventData]);
 
   return (
     <div>

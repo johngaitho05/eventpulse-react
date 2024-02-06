@@ -13,6 +13,7 @@ export const createRequest = (url, method='GET', body={}, is_form=false) => {
     let  req = {url, headers: is_form ? ApiFormHeaders : ApiHeaders, method:method}
     if (['POST', 'PUT'].indexOf(method) !== -1)
         req.body = body
+    console.log("req", req)
     return req
 }
 
@@ -20,11 +21,11 @@ export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery : fetchBaseQuery({baseUrl}),
     endpoints: (builder) => ({
-        login: builder.mutation({
+        authenticate: builder.mutation({
             query: (body) => createRequest(`/login`, 'POST', body)
         }),
-        register: builder.mutation({
-            query: (body) => createRequest('/users', 'POST', body, true)
+        register: builder.query({
+            query: (body) => createRequest('/users', 'POST', body)
         }),
         getUserById: builder.query({
             query: (userId) => createRequest(`/users/${userId}`)
@@ -35,8 +36,8 @@ export const apiSlice = createApi({
         getEvents: builder.query({
             query: () => createRequest(`/events`)
         }),
-        createEvent: builder.mutation({
-            query: () => createRequest('/events', 'POST')
+        createEvent: builder.query({
+            query: (body) => createRequest('/events', 'POST', body, true)
         }),
         getEventDetails: builder.query({
             query: (eventId) => createRequest(`/events/${eventId}`)
@@ -45,11 +46,11 @@ export const apiSlice = createApi({
 })
 
 export const {
-    useLoginMutation,
-    useRegisterMutation,
+    useAuthenticateMutation,
+    useRegisterQuery,
     useGetUserByIdQuery,
     useGetCountriesQuery,
     useGetEventsQuery,
-    useCreateEventMutation,
+    useCreateEventQuery,
     useGetEventDetailsQuery
 } = apiSlice;
