@@ -1,6 +1,7 @@
 import React from 'react';
 import { CalendarDays, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import {formatDate} from '../helpers/utils'
 
 const Event = ({ event }) => {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Event = ({ event }) => {
                 <p className="line-clamp-4">{event.description}</p>
                 <span className="flex gap-3">
                     <CalendarDays size={18} />
-                    <p>{event.start_date}</p>
+                    <p>{formatDate(event.start_date)}</p>
                 </span>
                 <span className="flex gap-3">
                     <MapPin strokeWidth={3} />

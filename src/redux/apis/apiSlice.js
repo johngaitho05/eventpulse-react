@@ -24,7 +24,7 @@ export const apiSlice = createApi({
         authenticate: builder.mutation({
             query: (body) => createRequest(`/login`, 'POST', body)
         }),
-        register: builder.query({
+        register: builder.mutation({
             query: (body) => createRequest('/users', 'POST', body)
         }),
         getUserById: builder.query({
@@ -36,7 +36,7 @@ export const apiSlice = createApi({
         getEvents: builder.query({
             query: () => createRequest(`/events`)
         }),
-        createEvent: builder.query({
+        createEvent: builder.mutation({
             query: (body) => createRequest('/events', 'POST', body, true)
         }),
         getEventDetails: builder.query({
@@ -47,10 +47,10 @@ export const apiSlice = createApi({
 
 export const {
     useAuthenticateMutation,
-    useRegisterQuery,
+    useRegisterMutation,
     useGetUserByIdQuery,
     useGetCountriesQuery,
     useGetEventsQuery,
-    useCreateEventQuery,
+    useCreateEventMutation,
     useGetEventDetailsQuery
 } = apiSlice;

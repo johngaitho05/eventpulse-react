@@ -1,10 +1,11 @@
 import { CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   useGetEventDetailsQuery, useGetEventsQuery,
 } from "../redux/apis/apiSlice.js";
 
 import { EventHighlightLoader, EventContentLoader, EventOrganizerLoader } from '../globals/eventDetailsLoader'
+import {formatDate} from '../helpers/utils'
 
 const Event = ({eventId}) => {
   let {
@@ -25,7 +26,7 @@ const Event = ({eventId}) => {
               className="text-2xl lg:text-4xl font-medium ">{event?.title}</h1>
             <span className="flex gap-6">
                         <CalendarDays/>
-                        <p>{event?.start_date}</p>
+                        <p>{formatDate(event?.start_date)}</p>
                     </span>
             <span className="flex gap-6">
                         <MapPin/>
@@ -58,7 +59,7 @@ const Event = ({eventId}) => {
                 {event?.tracks.map((track, index) => (
                   <div key={index}
                        className="flex flex-col border-s-8 p-3 border">
-                    <p>{track.start_date}</p>
+                    <p>{formatDate(track.start_date)}</p>
                     <p className="text-primary">{track.title}</p>
                     <p>
                       {track?.user_id?.name}
