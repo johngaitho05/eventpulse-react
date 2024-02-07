@@ -6,8 +6,8 @@ const Landing = () => {
   return (
     <div>
       <Hero />
-      <div>
-        <h1 className="text-xl font-medium text-[#44375f] max-w-[350px] pr-5 leading-8 mb-4 ml-24">
+      <div className="sm: mt-20">
+        <h1 className="text-xl font-medium text-[#44375f] pr-5 leading-8 mb-4 text-center w-full">
           Upcoming Events
         </h1>
         <Events simplified={true} nosearch={true}/>

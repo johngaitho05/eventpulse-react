@@ -21,7 +21,7 @@ const Event = ({eventId}) => {
         isFetching ? <EventHighlightLoader/> : <div
           className="w-full flex flex-col sm:flex-row events-header  pt-20 imaage">
           <div
-            className="w-full sm:w-1/2 text-white gap-8 flex flex-col px-5 sm:px-12 justify-center text-2xl ">
+            className="w-full sm:w-1/2 text-white gap-8 flex flex-col px-16 sm:px-12 justify-center text-2xl ">
             <h1
               className="text-2xl lg:text-4xl font-medium ">{event?.title}</h1>
             <span className="flex gap-6">
@@ -43,7 +43,7 @@ const Event = ({eventId}) => {
         </div>
       }
 
-      <div className="p-5 w-full mx-10">
+      <div className="p-5 px-16 box-content">
         <div className="flex flex-col sm:flex-row justify-between w-full">
           {
             isFetching ? <EventContentLoader/> :

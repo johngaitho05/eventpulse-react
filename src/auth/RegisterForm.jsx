@@ -5,7 +5,7 @@ import google from '../assets/google.png';
 
 import {
     useRegisterMutation,
-    useGetCountriesQuery, useAuthenticateMutation,
+    useGetCountriesQuery,
 } from "../redux/apis/apiSlice";
 import {Select, Input, Form, Button, Spin, Alert} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
