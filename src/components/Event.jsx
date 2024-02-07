@@ -1,7 +1,7 @@
 import React from 'react';
 import { CalendarDays, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import {formatDate} from '../helpers/utils'
+import { formatDate } from '../helpers/utils';
 
 const Event = ({ event }) => {
     const navigate = useNavigate();
@@ -10,9 +10,9 @@ const Event = ({ event }) => {
             className="max-w-[300px] text-sm border flex flex-col m-5 text-[#2f204e] cursor-pointer"
             onClick={() => navigate(`/events/${event.id}`)}
         >
-            <img src={event.banner_url} alt="" className="w-full h-[200px] object-cover" />
+            <img src={event.banner_url} alt="" className="w-full h-[200px] object-cover " />
             <div className="p-3 flex gap-5 flex-col">
-                <h2 className="font-medium text-xl">{event.title}</h2>
+                <h2 className="font-medium text-xl line-clamp-2">{event.title}</h2>
                 <p className="line-clamp-4">{event.description}</p>
                 <span className="flex gap-3">
                     <CalendarDays size={18} />

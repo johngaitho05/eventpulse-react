@@ -1,42 +1,29 @@
 import React, { useState } from 'react';
+import { Form, Input, Spin, Button } from 'antd';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import logo from '../assets/logo-sm.png';
+import { LoadingOutlined } from '@ant-design/icons';
+import { useCreateEventMutation } from '../redux/apis/apiSlice';
 
 const EventCreationForm = () => {
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        startDate: new Date(),
-        endDate: new Date(),
-        bannerUrl: '',
-        venueId: '',
-    });
+    const [form] = Form.useForm();
+    const [bannerFile, setBannerFile] = useState(null);
+    const [createEvent, { isLoading }] = useCreateEventMutation();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
+    const onFinish = (values) => {
+        values.bannerFile = bannerFile;
+        console.log('Received values:', values);
     };
 
-    const handleDateChange = (date, dateType) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [dateType]: date,
-        }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Submit logic here
-        console.log(formData);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setBannerFile(file);
     };
 
     return (
-        <div className=" p-4 auth h-auto lg:h-screen pt-[7rem]">
-            <div className="bg-white py-10 max-w-7xl mx-auto px-10 rounded-[20px]">
+        <div className="p-4 auth h-auto lg:h-screen pt-[7rem]">
+            <div className="bg-white py-10 max-w-7xl mx-auto px-10 rounded-[20px] overflow-y-auto">
                 <div className="flex flex-col justify-center items-center">
                     <div>
                         <img src={logo} alt="" className="h-11 object-cover" />
@@ -46,107 +33,76 @@ const EventCreationForm = () => {
                         You are a few clicks away from creating a new event
                     </p>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                            Event Title
-                        </label>
+                <Form
+                    form={form}
+                    layout="vertical"
+                    name="eventCreationForm"
+                    onFinish={onFinish}
+                    className="space-y-4"
+                >
+                    <Form.Item
+                        name="title"
+                        label="Event Title"
+                        rules={[{ required: true, message: 'Please enter the event title' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="description"
+                        label="Description"
+                        rules={[{ required: true, message: 'Please enter the event description' }]}
+                    >
+                        <Input.TextArea rows={4} />
+                    </Form.Item>
+                    <Form.Item
+                        name="startDate"
+                        label="Start Date"
+                        rules={[{ required: true, message: 'Please select the start date' }]}
+                    >
+                        <DatePicker style={{ width: '100%' }} />
+                    </Form.Item>
+                    <Form.Item
+                        name="endDate"
+                        label="End Date"
+                        rules={[{ required: true, message: 'Please select the end date' }]}
+                    >
+                        <DatePicker style={{ width: '100%' }} />
+                    </Form.Item>
+                    <Form.Item
+                        name="bannerUrl"
+                        label="Banner URL"
+                        rules={[{ required: true, message: 'Please upload the banner image' }]}
+                    >
                         <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            required
+                            type="file"
                             className="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-                            value={formData.title}
-                            onChange={handleChange}
+                            onChange={handleFileChange}
                         />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="description"
-                            className="block text-sm font-medium text-gray-700"
+                    </Form.Item>
+                    <Form.Item
+                        name="venueId"
+                        label="Venue ID"
+                        rules={[{ required: true, message: 'Please enter the venue ID' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="w-full bg-black text-center h-[40px] hover:bg-gray-950"
+                            disabled={isLoading}
                         >
-                            Description
-                        </label>
-                        <textarea
-                            name="description"
-                            id="description"
-                            rows="4"
-                            required
-                            className="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-                            value={formData.description}
-                            onChange={handleChange}
-                        ></textarea>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label
-                                htmlFor="startDate"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Start Date
-                            </label>
-                            <DatePicker
-                                selected={formData.startDate}
-                                onChange={(date) => handleDateChange(date, 'startDate')}
-                                className="mt-1 block w-full border border-gray-300 p-2 shadow-sm text-gray-700 sm:text-sm rounded-md"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="endDate"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                End Date
-                            </label>
-                            <DatePicker
-                                selected={formData.endDate}
-                                onChange={(date) => handleDateChange(date, 'endDate')}
-                                className="mt-1 block w-full border border-gray-300 p-2 shadow-sm text-gray-700 sm:text-sm rounded-md"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="bannerUrl"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Banner URL
-                        </label>
-                        <input
-                            type="url"
-                            name="bannerUrl"
-                            id="bannerUrl"
-                            className="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-                            value={formData.bannerUrl}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="venueId"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Venue ID
-                        </label>
-                        <input
-                            type="text"
-                            name="venueId"
-                            id="venueId"
-                            className="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-                            value={formData.venueId}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <button
-                            type="submit"
-                            className="w-full lg:w-1/3  items-center flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                        >
-                            Create Event
-                        </button>
-                    </div>
-                </form>
+                            {isLoading ? (
+                                <Spin
+                                    indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                                />
+                            ) : (
+                                'create event'
+                            )}
+                        </Button>
+                    </Form.Item>
+                </Form>
             </div>
         </div>
     );
