@@ -8,12 +8,12 @@ const ApiFormHeaders = {
     'Content-Type': 'multipart/form-data',
 }
 const baseUrl = 'https://events.johngaitho.info/api/v1'
+// const  baseUrl = 'http://localhost:5000/api/v1'
 
 export const createRequest = (url, method='GET', body={}, is_form=false) => {
     let  req = {url, headers: is_form ? ApiFormHeaders : ApiHeaders, method:method}
     if (['POST', 'PUT'].indexOf(method) !== -1)
         req.body = body
-    console.log("req", req)
     return req
 }
 

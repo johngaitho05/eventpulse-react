@@ -39,7 +39,7 @@ const EventCreationForm = () => {
             <div className="bg-white py-10 max-w-7xl mx-auto px-10 rounded-[20px]">
                 <div className="flex flex-col justify-center items-center">
                     <div>
-                        <img src={logo} alt="" className="h-16 object-cover" />
+                        <img src={logo} alt="" className="h-11 object-cover" />
                     </div>
                     <h2 className="font-bold text-2xl">Event Pulse</h2>
                     <p className="my-1 text-sm text-gray-700">

@@ -1,183 +1,125 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
-import { RiGoogleFill } from 'react-icons/ri';
 import logo from '../assets/logo-sm.png';
 import google from '../assets/google.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { Loader } from 'lucide-react';
+
+import {
+    useRegisterMutation,
+    useGetCountriesQuery, useAuthenticateMutation,
+} from "../redux/apis/apiSlice";
+import {Select, Input, Form, Button, Spin, Alert} from "antd";
+import {LoadingOutlined} from "@ant-design/icons";
 
 const RegistrationForm = () => {
-    const dispatch = useDispatch();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        password: '',
-        confirmPassword: '',
-        country: '',
-    });
-    const [showPassword, setShowPassword] = useState(false);
+    const form = Form.useFormInstance();
+    const {
+        data: countriesList, isFetching, isSuccess,
+        isError,
+        error
+    } = useGetCountriesQuery()
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevState) => ({ ...prevState, [name]: value }));
+    const [countries, setCountries] = useState([])
+    const [registerUser, { isLoading }] = useRegisterMutation()
+    const [errorMsg, setErrorMessage] = useState("")
+
+    useEffect(() => {
+        setCountries((countriesList || []).map((country)=> ({label: country.name, value: country.id })))
+    }, [countriesList]);
+
+    const handleSubmit = async (formData) => {
+        setErrorMessage("")
+        await registerUser(formData).then((data)=>{
+            if (!data?.data)
+                setErrorMessage(data?.error?.data?.error || "Something went wrong!")
+            else
+            {
+             localStorage.setItem('user', JSON.stringify(data.data))
+             window.location = '/'
+            }
+        })
     };
 
-    const handlePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log('Form Data:', formData);
-    };
+    const filterOption = (input, option) =>
+      (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
     return (
-        <div className=" h-auto lg:h-full px-4 w-full lg:w-[45%] flex flex-col items-center overflow-y-auto no-scrollbar ">
-            <div className="flex flex-col justify-center items-center">
-                <div>
-                    <img src={logo} alt="" className="h-16 object-cover" />
-                </div>
-                <h2 className="font-bold text-2xl">Welcome to Event Pulse</h2>
-                <p className="my-1 text-sm text-gray-700">
-                    Enter the details below to create an account
-                </p>
-            </div>
-            <form
-                onSubmit={handleSubmit}
-                className="w-full max-w-xl space-y-6 bg-white p-8 rounded-lg"
-            >
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                        Name
-                    </label>
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Enter your name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-100"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-100"
-                        required
-                        placeholder="Enter your email"
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                        Phone
-                    </label>
-                    <input
-                        type="text"
-                        name="phone"
-                        id="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-100"
-                        required
-                        placeholder="Enter your phone no."
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                        Password
-                    </label>
-                    <div className="relative">
-                        <input
-                            type={showPassword ? 'text' : 'password'}
-                            name="password"
-                            id="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-100"
-                            required
-                            placeholder="Enter your password"
-                        />
-                        <button
-                            type="button"
-                            onClick={handlePasswordVisibility}
-                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
-                        >
-                            {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        htmlFor="confirmPassword"
-                        className="block text-sm font-medium text-gray-700"
-                    >
-                        Confirm Password
-                    </label>
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-100"
-                        required
-                        placeholder="confirm your password"
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                        Country
-                    </label>
-                    <input
-                        type="text"
-                        name="country"
-                        id="country"
-                        value={formData.country}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-100"
-                    />
-                </div>
-
-                <button
-                    type="submit"
-                    className="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black-100 hover:bg-gray-800 focus:outline-none focus:border-gray-800 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                >
-                    Register
-                </button>
-
-                <div>
-                    <button
-                        type="button"
-                        className="w-full inline-flex items-center justify-center mb-5 py-4 px-4 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        <img src={google} alt="" className="h-6 mr-2" />
-                        Sign in with Google
-                    </button>
-                    Already have an account?
-                    <Link
-                        to="/login"
-                        className="font-medium text-indigo-600 hover:text-indigo-500 text center mt-2 ml-2"
-                    >Login here
-                    </Link>
-                </div>
-            </form>
-        </div>
+      <div className=" h-auto lg:h-full px-4 w-full lg:w-[45%] flex flex-col items-center overflow-y-auto no-scrollbar ">
+          <div className="flex flex-col justify-center items-center">
+              <div>
+                  <img src={logo} alt="" className="h-11 object-cover" />
+              </div>
+              <h2 className="font-bold text-2xl">Welcome to Event Pulse</h2>
+              <p className="my-1 text-sm text-gray-700">
+                  Enter the details below to create an account
+              </p>
+          </div>
+          <Form layout="vertical" form={form} onFinish={handleSubmit}>
+              <Form.Item name="name" label="Name" required="true" rules={[{ required: true, message: 'Please input your name'}]}>
+                  <Input placeholder="Your full name" className="w-full h-[40px]"/>
+              </Form.Item>
+              <Form.Item name="email" label="Email" required="true" rules={[{ required: true, type: "email", message: 'Please enter a valid email'}]}>
+                  <Input placeholder="Your email" className="w-full h-[40px]"/>
+              </Form.Item>
+              <Form.Item name="phone" label="Phone Number" required="true" rules={[{ required: true, message: 'Please input your phone number'}]}>
+                  <Input placeholder="Your phone number" className="w-full h-[40px]"/>
+              </Form.Item>
+              <Form.Item name="password"  label="Password" required="true" rules={[{ required: true, message: 'Please input your password'}]} hasFeedback>
+                  <Input.Password className="w-full h-[40px]"/>
+              </Form.Item>
+              <Form.Item
+                name="confirm"
+                label="Confirm Password"
+                dependencies={['password']}
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please confirm your password!',
+                    },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('The new password that you entered do not match!'));
+                        },
+                    }),
+                ]}
+              >
+                  <Input.Password className="w-full h-[40px]"/>
+              </Form.Item>
+              <Form.Item name="country_id" label="Country" rules={[{ required: true, message: 'Please select a country'}]}>
+                  <Select className="w-full h-[40px]"
+                          showSearch
+                          placeholder="Select your country"
+                          optionFilterProp="children"
+                          filterOption={filterOption}
+                          options={countries}
+                  />
+              </Form.Item>
+              <Form.Item className="mb-2">
+                  <Button type="primary" htmlType="submit" className="w-full bg-black text-center h-[40px] hover:bg-gray-950" disabled={isLoading}>
+                      {isLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : 'Submit' }
+                  </Button>
+              </Form.Item>
+              {errorMsg && <Alert className="my-2" message={errorMsg} type="error" />}
+              <div>
+                  <button
+                    type="button"
+                    className="w-full inline-flex items-center justify-center mb-5 py-2 px-4 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                      <img src={google} alt="" className="h-6 mr-2"/>
+                      Sign in with Google
+                  </button>
+                  Already have an account?
+                  <Link
+                    to="/login"
+                    className="font-medium text-indigo-600 hover:text-indigo-500 text center mt-2 ml-2"
+                  >Login here
+                  </Link>
+              </div>
+          </Form>
+      </div>
     );
 };
 
