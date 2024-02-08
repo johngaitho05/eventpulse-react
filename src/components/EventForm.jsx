@@ -60,7 +60,7 @@ const EventCreationForm = () => {
                 label="Event Title"
                 rules={[{ required: true, message: 'Please enter the event title' }]}
               >
-                  <Input />
+                  <Input className="h-[40px]"/>
               </Form.Item>
               <Form.Item
                 name="description"
@@ -74,7 +74,7 @@ const EventCreationForm = () => {
                 label="Dates"
                 rules={[{ required: true, message: 'Please select the end date' }]}
               >
-                  <RangePicker showTime/>
+                  <RangePicker showTime className="h-[40px]"/>
               </Form.Item>
               <Form.Item
                 name="banner"
