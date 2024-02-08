@@ -1,19 +1,51 @@
 import { CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  useGetEventDetailsQuery, useGetEventsQuery,
+  useGetEventDetailsQuery, useRegisterAttendeeMutation, useDeRegisterAttendeeMutation,
 } from "../redux/apis/apiSlice.js";
 
 import { EventHighlightLoader, EventContentLoader, EventOrganizerLoader } from '../globals/eventDetailsLoader'
-import {formatDate} from '../helpers/utils'
+import {formatDate, getUser} from '../helpers/utils'
+import {DoneOutlined} from "@mui/icons-material";
+import {useNavigate} from "react-router-dom";
+import {LoadingOutlined} from "@ant-design/icons";
+import {Spin} from "antd";
 
 const Event = ({eventId}) => {
+  const navigate = useNavigate();
   let {
     data: event, isFetching, isSuccess,
     isError,
     error
   } = useGetEventDetailsQuery(eventId)
 
+  const [user, setUser] = useState(getUser())
+  const [registered, setRegistered] = useState(false)
+  const [registerUser, { registerLoading }] = useRegisterAttendeeMutation();
+  const [deRegisterUser, { deRegisterLoading }] = useDeRegisterAttendeeMutation();
+  const [errorMsg, setErrorMessage] = useState("")
+
+  useEffect(() => {
+    if (event && user){
+      setRegistered(!!event.attendees.find(_user => _user.id === user.id))
+    }
+  }, [event, user]);
+
+
+  const handleRegister = async () =>{
+    setErrorMessage("")
+    if (!user)
+      navigate('/login')
+    if (registered){
+      await deRegisterUser({eventId:event.id, userId:user.id}).then((res)=>{
+        if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
+      })
+    }else{
+      await registerUser({eventId: event.id, userId: user.id}).then((res)=>{
+        if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
+      })
+    }
+  }
 
   return (
     <div>
@@ -35,10 +67,17 @@ const Event = ({eventId}) => {
           </div>
           <div
             className="w-full sm:w-1/2 flex justify-center  items-center mt-5 sm:mt-0">
-            <button
-              className="w-[200px] font-medium text-white uppercase py-3 px-5 border-0 bg-primary">
-              Register
-            </button>
+            {registered ?
+              <button className="bg-gray-600 px-4 py-2 text-white" onClick={handleRegister}>
+                {deRegisterLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>: <><DoneOutlined/> Registered</>}
+              </button>
+              :
+              <button onClick={handleRegister}
+                      className="w-[200px] font-medium text-white uppercase py-3 px-5 border-0 bg-primary">
+                {registerLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>:  'Register'}
+              </button>
+
+            }
           </div>
         </div>
       }

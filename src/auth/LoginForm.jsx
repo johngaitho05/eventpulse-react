@@ -17,7 +17,6 @@ const LoginForm = () => {
         setError("")
         await authenticateUser(formData).then(function (data){
             if (!data?.data) {
-                console.log("data", data)
                 setError(data?.error?.data?.error || "Something went wrong!")
             }
             else

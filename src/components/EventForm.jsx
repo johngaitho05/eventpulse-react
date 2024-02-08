@@ -22,10 +22,6 @@ const EventCreationForm = () => {
         );
     }, [venuesList]);
 
-    const onUpload = (data)=> {
-        // console.log("data", data)
-    }
-
     const onFinish = async (formData) => {
         if (!user)
             setErrorMessage("Please login to create an event")
@@ -85,7 +81,6 @@ const EventCreationForm = () => {
                 label="Banner Image"
                 rules={[{ required: true, message: 'Please upload the banner image' }]}>
                   <Upload
-                    action={onUpload}
                     accept=".jpg, .jpeg, .png"
                     maxCount={1}
                     label="Image"
@@ -121,9 +116,7 @@ const EventCreationForm = () => {
                     disabled={isLoading}
                   >
                       {isLoading ? (
-                        <Spin
-                          indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-                        />
+                        <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>
                       ) : (
                         'create event'
                       )}

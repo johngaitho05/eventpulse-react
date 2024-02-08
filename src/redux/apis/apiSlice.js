@@ -31,13 +31,30 @@ export const apiSlice = createApi({
         }),
         getEvents: builder.query({
             query: () => createRequest(`/events`),
+            providesTags: ['EventsList'],
         }),
         createEvent: builder.mutation({
             query: (body) => createRequest('/events', 'POST', body, true),
+            async onQueryStarted(body , { dispatch }) {
+                dispatch(apiSlice.util.invalidateTags(['EventList']))
+            },
         }),
         getEventDetails: builder.query({
             query: (eventId) => createRequest(`/events/${eventId}`),
+            providesTags: ['EventDetails'],
         }),
+        registerAttendee: builder.mutation({
+            query: (body) => createRequest(`/events/${body.eventId}/users/${body.userId}`, 'POST'),
+            async onQueryStarted(body , { dispatch }) {
+                dispatch(apiSlice.util.invalidateTags(['EventDetails']))
+            },
+        }),
+        deRegisterAttendee: builder.mutation({
+            query: (body)=> createRequest(`/events/${body.eventId}/users/${body.userId}`, 'DELETE'),
+            async onQueryStarted(body , { dispatch }) {
+                dispatch(apiSlice.util.invalidateTags(['EventDetails']))
+            },
+        })
     }),
 });
 
@@ -50,4 +67,6 @@ export const {
     useGetEventsQuery,
     useCreateEventMutation,
     useGetEventDetailsQuery,
+    useRegisterAttendeeMutation,
+    useDeRegisterAttendeeMutation
 } = apiSlice;

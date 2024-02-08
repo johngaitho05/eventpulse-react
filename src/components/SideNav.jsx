@@ -42,7 +42,7 @@ const SideNav = () => {
       <Menu className="w-full mt-10 bg-transparent text-white"
             onClick={onClick}
             defaultSelectedKeys={['overview']}
-            defaultOpenKeys={['events', 'recommendations']}
+            defaultOpenKeys={['events', 'recommended']}
             mode="inline"
             items={items}
       />
