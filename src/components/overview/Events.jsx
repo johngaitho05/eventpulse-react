@@ -5,31 +5,30 @@ import { Input } from 'antd';
 import {useNavigate} from "react-router-dom";
 import {
     CalendarClock,
-    CalendarFold,
+    CalendarDays,
     Globe,
-    ListCollapse,
-    LocateIcon,
-    Map,
+    ListTodo,
     MapPin,
     Plus,
     UsersRound,
 } from 'lucide-react';
+import {CalendarMonth, CalendarMonthOutlined} from "@mui/icons-material";
 
 const data = [
     {
-        icon: CalendarFold,
+        icon: CalendarClock,
         name: 'past events',
         color: 'bg-primary',
         count: 4,
     },
     {
-        icon: CalendarClock,
+        icon: CalendarDays,
         name: 'Upcoming events',
         color: 'bg-yellow-400',
         count: 4,
     },
     {
-        icon: ListCollapse,
+        icon: ListTodo,
         name: 'All events',
         color: 'bg-purple-400',
         count: 4,
@@ -101,7 +100,7 @@ const Events = () => {
                         <Card className="w-[250px] h-[100px]">
                             <div className="flex justify-start gap-4">
                                 <div>
-                                    <CalendarClock
+                                    <CalendarDays
                                         className="bg-yellow-400 text-white p-2 rounded-[20px]"
                                         size={55}
                                     />
@@ -109,7 +108,7 @@ const Events = () => {
                                 <div className="flex flex-col gap-2">
                                     <h2 className="font-bold text-2xl">5</h2>
                                     <p className="capitalize text-gray-600n text-sm">
-                                        Past Events
+                                        Upcoming Events
                                     </p>
                                 </div>
                             </div>
