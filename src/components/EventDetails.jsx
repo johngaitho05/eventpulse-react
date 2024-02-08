@@ -93,8 +93,10 @@ const Event = ({eventId}) => {
                 <p className="text-base mt-3 w-full">
                   {event?.description}
                 </p>
-                <h1
-                  className="text-4xl font-medium mt-2 text-gray-600">Topics</h1>
+                {
+                  event?.tracks && <h1
+                    className="text-4xl font-medium mt-2 text-gray-600">Topics</h1>
+                }
                 {event?.tracks.map((track, index) => (
                   <div key={index}
                        className="flex flex-col border-s-8 p-3 border">

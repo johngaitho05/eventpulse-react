@@ -4,7 +4,7 @@ import DashboardLayout from './DashboardLayout'
 const NewEvent = () => {
     return (
         <DashboardLayout>
-            <h2 className="text-3xl px-4 py-4">Create Event</h2>
+            <h2 className="text-lg px-4 mt-10 mb-4">Create Event</h2>
             <EventCreationForm />
         </DashboardLayout>
     );
