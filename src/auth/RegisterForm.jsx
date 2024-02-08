@@ -8,7 +8,7 @@ import { Select, Input, Form, Button, Spin, Alert } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 const RegistrationForm = () => {
-    const form = Form.useFormInstance();
+    // const form = Form.useFormInstance();
     const { data: countriesList, isFetching, isSuccess, isError, error } = useGetCountriesQuery();
 
     const [countries, setCountries] = useState([]);
@@ -46,7 +46,7 @@ const RegistrationForm = () => {
                     Enter the details below to create an account
                 </p>
             </div>
-            <Form layout="vertical" form={form} onFinish={handleSubmit}>
+            <Form layout="vertical" onFinish={handleSubmit}>
                 <Form.Item
                     name="name"
                     label="Name"

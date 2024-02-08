@@ -32,6 +32,9 @@ export const apiSlice = createApi({
         getCountries: builder.query({
             query: () => createRequest(`/countries`),
         }),
+        getVenues: builder.query({
+            query: () => createRequest(`/venues`),
+        }),
         getEvents: builder.query({
             query: () => createRequest(`/events`),
         }),
@@ -49,6 +52,7 @@ export const {
     useRegisterMutation,
     useGetUserByIdQuery,
     useGetCountriesQuery,
+    useGetVenuesQuery,
     useGetEventsQuery,
     useCreateEventMutation,
     useGetEventDetailsQuery,

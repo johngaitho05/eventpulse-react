@@ -1,28 +1,51 @@
-import React, { useState } from 'react';
-import { Form, Input, Spin, Button } from 'antd';
-import DatePicker from 'react-datepicker';
+import React, { useState, useEffect } from 'react';
+import { Form, Input, Spin, Button, DatePicker, Upload, Select } from 'antd';
 import 'react-datepicker/dist/react-datepicker.css';
 import logo from '../assets/logo-sm.png';
-import { LoadingOutlined } from '@ant-design/icons';
-import { useCreateEventMutation } from '../redux/apis/apiSlice';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { useCreateEventMutation, useGetVenuesQuery } from '../redux/apis/apiSlice';
 
 const EventCreationForm = () => {
-    const [form] = Form.useForm();
-    const [bannerFile, setBannerFile] = useState(null);
+    const form = Form.useFormInstance();
     const [createEvent, { isLoading }] = useCreateEventMutation();
+    const [errorMsg, setErrorMessage] = useState('');
+    const { data: venueList, isFetching, isSuccess, isError, error } = useGetVenuesQuery();
+    const [venues, setVenues] = useState([]);
 
-    const onFinish = (values) => {
-        values.bannerFile = bannerFile;
-        console.log('Received values:', values);
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const userId = userData?.id;
+    console.log(userId);
+
+    useEffect(() => {
+        setVenues((venueList || []).map((venue) => ({ label: venue.name, value: venue.id })));
+    }, [venueList]);
+
+    const onFinish = async (values) => {
+        const formData = new FormData();
+        formData.append('title', values.title);
+        formData.append('description', values.description);
+        formData.append('start_date', values.start_date.format());
+        formData.append('end_date', values.end_date.format());
+        formData.append('venue_id', values.venue_id);
+        formData.append('user_id', values.user_id);
+
+        if (values.banner_url && values.banner_url.file) {
+            formData.append('banner_url', values.banner_url.file.originFileObj);
+        }
+
+        try {
+            const response = await createEvent(formData).unwrap();
+            // Handle success
+        } catch (error) {
+            // Handle error
+        }
     };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setBannerFile(file);
-    };
+    const filterOption = (input, option) =>
+        (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
     return (
-        <div className="p-4 auth h-auto lg:h-screen pt-[7rem]">
+        <div className="p-4 auth h-auto pt-[7rem]">
             <div className="bg-white py-10 max-w-7xl mx-auto px-10 rounded-[20px] overflow-y-auto">
                 <div className="flex flex-col justify-center items-center">
                     <div>
@@ -33,6 +56,7 @@ const EventCreationForm = () => {
                         You are a few clicks away from creating a new event
                     </p>
                 </div>
+
                 <Form
                     form={form}
                     layout="vertical"
@@ -40,6 +64,9 @@ const EventCreationForm = () => {
                     onFinish={onFinish}
                     className="space-y-4"
                 >
+                    <Form.Item name="user_id" hidden initialValue={userId}>
+                        <Input />
+                    </Form.Item>
                     <Form.Item
                         name="title"
                         label="Event Title"
@@ -55,36 +82,53 @@ const EventCreationForm = () => {
                         <Input.TextArea rows={4} />
                     </Form.Item>
                     <Form.Item
-                        name="startDate"
+                        name="start_date"
                         label="Start Date"
                         rules={[{ required: true, message: 'Please select the start date' }]}
                     >
                         <DatePicker style={{ width: '100%' }} />
                     </Form.Item>
                     <Form.Item
-                        name="endDate"
+                        name="end_date"
                         label="End Date"
                         rules={[{ required: true, message: 'Please select the end date' }]}
                     >
-                        <DatePicker style={{ width: '100%' }} />
-                    </Form.Item>
-                    <Form.Item
-                        name="bannerUrl"
-                        label="Banner URL"
-                        rules={[{ required: true, message: 'Please upload the banner image' }]}
-                    >
-                        <input
-                            type="file"
-                            className="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-                            onChange={handleFileChange}
+                        <DatePicker
+                            style={{ width: '100%' }}
+                            className="mt-1 block w-full border border-gray-300 p-2 shadow-sm text-gray-700 sm:text-sm rounded-md"
                         />
                     </Form.Item>
                     <Form.Item
-                        name="venueId"
-                        label="Venue ID"
-                        rules={[{ required: true, message: 'Please enter the venue ID' }]}
+                        name="banner_url"
+                        label="Banner Image"
+                        rules={[{ required: true, message: 'Please upload the banner image' }]}
                     >
-                        <Input />
+                        <Upload
+                            accept=".jpg, .jpeg, .png"
+                            maxCount={1}
+                            label="Image"
+                            listType="picture-card"
+                            rules={[{ required: true, message: 'Please upload the banner image' }]}
+                        >
+                            <button type="button">
+                                <PlusOutlined />
+                                <div style={{ marginTop: 8 }}>Upload</div>
+                            </button>
+                        </Upload>
+                    </Form.Item>
+                    <Form.Item
+                        name="venue_id"
+                        label="Venue"
+                        rules={[{ required: true, message: 'Please select a venue' }]}
+                    >
+                        <Select
+                            className="w-full h-[40px]"
+                            showSearch
+                            placeholder="Select a venue"
+                            optionFilterProp="children"
+                            filterOption={filterOption}
+                            options={venues}
+                        />
                     </Form.Item>
                     <Form.Item>
                         <Button
