@@ -5,13 +5,7 @@ import { AlignJustify, X, User } from 'lucide-react';
 import { links } from '../data/links';
 import {Button, Dropdown, Select} from 'antd';
 import { DownOutlined } from "@ant-design/icons";
-
-const getUser = ()=> {
-  let user =  localStorage.getItem('user')
-  if (user)
-    return JSON.parse(user)
-  return null
-}
+import {getUser} from "../helpers/utils.js";
 
 function getInitials(name) {
   const names = name.split(' ');
