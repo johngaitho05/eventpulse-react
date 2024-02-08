@@ -20,22 +20,27 @@ const EventCreationForm = () => {
         setVenues((venueList || []).map((venue) => ({ label: venue.name, value: venue.id })));
     }, [venueList]);
 
+    const formatDate = (date) => {
+        const formattedDate = new Date(date);
+        return formattedDate.toISOString().split('T')[0]; // Extracts only the date part without the timezone offset
+    };
+
     const onFinish = async (values) => {
         const formData = new FormData();
+        formData.append('user_id', values.user_id);
         formData.append('title', values.title);
         formData.append('description', values.description);
-        formData.append('start_date', values.start_date.format());
-        formData.append('end_date', values.end_date.format());
+        formData.append('start_date', formatDate(values.start_date));
+        formData.append('end_date', formatDate(values.end_date));
         formData.append('venue_id', values.venue_id);
-        formData.append('user_id', values.user_id);
+        formData.append('banner_url', values.banner_url.file.originFileObj);
 
         if (values.banner_url && values.banner_url.file) {
             formData.append('banner_url', values.banner_url.file.originFileObj);
         }
 
         try {
-            const response = await createEvent(formData).unwrap();
-            // Handle success
+            const response = await createEvent(formData);
         } catch (error) {
             // Handle error
         }
@@ -58,11 +63,12 @@ const EventCreationForm = () => {
                 </div>
 
                 <Form
-                    form={form}
+                    // form={form}
                     layout="vertical"
                     name="eventCreationForm"
                     onFinish={onFinish}
                     className="space-y-4"
+                    enctype="multipart/form-data"
                 >
                     <Form.Item name="user_id" hidden initialValue={userId}>
                         <Input />
