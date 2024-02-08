@@ -13,7 +13,7 @@ export const links = [
     {
         name: 'create events',
         icon: FilePenLine,
-        link: '/new-event',
+        link: '/dashboard/new-event',
     },
 ];
 

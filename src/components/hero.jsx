@@ -26,7 +26,7 @@ const Hero = () => {
                     </button>
                     <button
                         className="w-[200px] font-medium text-gray-700 py-3 px-5 border-2 border-primary "
-                        onClick={() => navigate('/new-event')}
+                        onClick={() => navigate('/dashboard/new-event')}
                     >
                         Publish an Event
                     </button>

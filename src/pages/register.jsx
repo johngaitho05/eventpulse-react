@@ -1,11 +1,11 @@
 import React from 'react';
 import RegisterComp from '../auth/Register';
-
+import Layout from './Layout';
 const Register = () => {
     return (
-        <div>
+        <Layout>
             <RegisterComp />
-        </div>
+        </Layout>
     );
 };
 

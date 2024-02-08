@@ -1,11 +1,12 @@
 import React from 'react';
 import LoginComp from '../auth/Login';
+import Layout from './Layout';
 
 const Login = () => {
     return (
-        <div>
+        <Layout>
             <LoginComp />
-        </div>
+        </Layout>
     );
 };
 

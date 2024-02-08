@@ -51,7 +51,7 @@ const EventCreationForm = () => {
       (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
     return (
-      <div className="px-4 lg:h-screen pt-[7rem] max-w-[700px]">
+      <div className="px-4 lg:h-screen max-w-[700px]">
           <Form
             form={form}
             layout="vertical"

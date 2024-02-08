@@ -75,7 +75,6 @@ const Header = () => {
           onClick={() => navigate('/')}
         >
           <img src={Logo} alt="EventPulse" className="w-[180px]" />
-          {/*<span className="text-white-100 font-bold ">Event Pulse</span>*/}
         </div>
         <div
           onClick={() => setOpen(!open)}

@@ -1,10 +1,12 @@
 import React from 'react';
 import EventsComp from '../components/Events';
+import Layout from './Layout';
+
 const Events = () => {
     return (
-        <div>
+        <Layout>
             <EventsComp />
-        </div>
+        </Layout>
     );
 };
 
