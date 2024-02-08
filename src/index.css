@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Sanchez&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-
+body {
+  font-family: 'Sanchez', serif;
+}
 
 .hero-section {
   width: 100%;
@@ -41,6 +44,18 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position:center;
+}
+
+.sidenav {
+  .ant-menu-submenu-title{
+    font-size: 1rem;
+  }
+  .ant-menu-item{
+    font-size: .9rem;
+  }
+  .ant-menu-item:hover, .ant-menu-item-selected, .ant-btn-default:hover {
+    color: #ea3b3b !important;
+  }
 }
 
 
