@@ -37,3 +37,9 @@ export const getUser = ()=> {
     return JSON.parse(user)
   return null
 }
+
+
+export const CloudinaryImage = (url, width=450)=>{
+    // Loads minified version of a cloudinary image by applying width
+    return `https://res.cloudinary.com/da3jmmlpj/image/upload/f_auto,c_limit,w_${width},q_auto/` + url.split('image/upload/')[1]
+}
