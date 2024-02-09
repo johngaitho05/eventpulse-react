@@ -56,7 +56,7 @@ body {
   color: #ea3b3b !important;
 }
 
-.ant-btn:not(.ant-dropdown-trigger) {
+.ant-btn:not(.ant-dropdown-trigger):not(.ant-input-search-button) {
   background-color: #1677ff;
 }
 

@@ -4,7 +4,7 @@ import {GlobalOutlined, LogoutOutlined} from "@ant-design/icons";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import EventIcon from '@mui/icons-material/Event';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
-import {DoneOutlined, MyLocationOutlined, SettingsOutlined} from "@mui/icons-material";
+import {DoneOutlined, House, MyLocationOutlined, SettingsOutlined} from "@mui/icons-material";
 import {Link, useNavigate} from 'react-router-dom';
 import Logo from "../assets/logo.png";
 import {TbCalendarUser} from "react-icons/tb";
@@ -21,6 +21,7 @@ const items = [
   getItem('Overview', 'overview', <DashboardIcon/>),
   getItem('Events', 'events', <EventIcon/>, [
     getItem('Create Event', 'new-event', <EditCalendarIcon/>),
+    getItem('Create Venue', 'new-venue', <House/>),
     getItem('My Events', 'my-events', <TbCalendarUser/>),
     getItem('Registered Events', 'registered-events', <DoneOutlined/>),
     getItem('Recommended', 'recommended', null, [
@@ -33,7 +34,7 @@ const items = [
 ];
 const SideNav = () => {
   const navigate = useNavigate();
-
+    const loc = window.location.pathname.split('dashboard/')[1] || 'overview'
   const onClick = (menu) => {
     if (menu.key === 'logout'){
       localStorage.removeItem('user')
@@ -52,7 +53,7 @@ const SideNav = () => {
       </div>
       <Menu className="w-full mt-10 bg-transparent text-white hover:text-white"
             onClick={onClick}
-            defaultSelectedKeys={['overview']}
+            defaultSelectedKeys={[loc]}
             defaultOpenKeys={['events', 'recommended']}
             mode="inline"
             items={items}
