@@ -18,6 +18,12 @@ const PrivateRoutes = () => {
     )
 }
 
+const PublicRoutes = () => {
+    const user = getUser()
+    return(
+      user ? <Navigate to="/"/> : <Outlet/>
+    )
+}
 
 const Index = () => {
     return (
@@ -25,8 +31,10 @@ const Index = () => {
           <Routes>
               <Route path="*" element={<NotFound/>} />
               <Route path="/" element={<Landing />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route element={<PublicRoutes />}>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+              </Route>
               <Route path="/events" element={<Events />} />
               <Route path="/events/:id" element={<EventDetails />} />
               <Route element={<PrivateRoutes />}>
