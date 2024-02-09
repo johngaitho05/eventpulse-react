@@ -56,8 +56,12 @@ body {
   color: #ea3b3b !important;
 }
 
+.ant-menu-submenu-title {
+  color: #ffffff !important;
+}
+
 .ant-btn:not(.ant-dropdown-trigger):not(.ant-input-search-button) {
-  background-color: #1677ff;
+  background-color: #000000;
 }
 
 @layer utilities {

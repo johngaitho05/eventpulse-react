@@ -32,12 +32,22 @@ export const formatDate = (dt,  client=true)=> {
 
 
 export const getUser = ()=> {
-  let user =  localStorage.getItem('user')
-  if (user)
-    return JSON.parse(user)
-  return null
+    let user =  localStorage.getItem('user')
+    if (user)
+        return JSON.parse(user)
+    return null
 }
 
+export const getInitials = ()=> {
+    const user = getUser()
+    if (!user)
+        return ""
+    const name = user.name
+    const names = name.split(' ');
+    const firstLetters = names.map(word => word.charAt(0));
+    const initials = firstLetters.slice(0, 2).join('');
+    return initials.toUpperCase();
+}
 
 export const CloudinaryImage = (url, width=450)=>{
     // Loads minified version of a cloudinary image by applying width

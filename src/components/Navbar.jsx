@@ -5,15 +5,7 @@ import { AlignJustify, X, User } from 'lucide-react';
 import { links } from '../data/links';
 import {Button, Dropdown, Select} from 'antd';
 import { DownOutlined } from "@ant-design/icons";
-import {getUser} from "../helpers/utils.js";
-
-function getInitials(name) {
-  const names = name.split(' ');
-  const firstLetters = names.map(word => word.charAt(0));
-  const initials = firstLetters.slice(0, 2).join('');
-  return initials.toUpperCase();
-}
-
+import {getUser, getInitials} from "../helpers/utils.js";
 
 
 const Header = () => {
@@ -22,7 +14,6 @@ const Header = () => {
   const [user, setUser] = useState(getUser())
   const location = useLocation();
   const navigate = useNavigate();
-  const initials = user ? getInitials(user.name) : ""
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,7 +98,7 @@ const Header = () => {
             {user ? (
               <Dropdown menu={{ items }} placement="bottomRight" className="p-0">
                 <Button className="border-none text-white text-md">
-                  <span className={'text-sm mr-2 bg-red-700 p-2 rounded-full'}>{initials}</span>
+                  <span className="text-sm mr-2 bg-red-700 p-2 rounded-full font-bold">{getInitials()}</span>
                   {user?.name}
                   <DownOutlined />
                 </Button>
