@@ -95,7 +95,7 @@ const EventCreationForm = () => {
               <Form.Item
                 name="venue_id"
                 label="Venue"
-                rules={[{ required: true, message: 'Please enter the venue ID' }]}>
+                rules={[{ required: true, message: 'Please select a venue' }]}>
                   <Select
                     className="w-full h-[40px]"
                     showSearch

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { GlobalOutlined} from "@ant-design/icons";
+import {GlobalOutlined, LogoutOutlined} from "@ant-design/icons";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import EventIcon from '@mui/icons-material/Event';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
-import {DoneOutlined, MyLocationOutlined} from "@mui/icons-material";
+import {DoneOutlined, MyLocationOutlined, SettingsOutlined} from "@mui/icons-material";
 import {Link, useNavigate} from 'react-router-dom';
 import Logo from "../assets/logo.png";
 import {TbCalendarUser} from "react-icons/tb";
@@ -28,12 +28,19 @@ const items = [
       getItem('International', 'recommended-international', <GlobalOutlined/>)
     ]),
   ]),
+  getItem('Settings', 'settings', <SettingsOutlined/>),
+  getItem('logout', 'logout', <LogoutOutlined/>),
 ];
 const SideNav = () => {
   const navigate = useNavigate();
 
   const onClick = (menu) => {
-    navigate(`/dashboard/${menu.key === 'overview' ? '': menu.key}`)
+    if (menu.key === 'logout'){
+      localStorage.removeItem('user')
+      window.location = '/'
+    }else {
+      navigate(`/dashboard/${menu.key === 'overview' ? '' : menu.key}`)
+    }
   }
 
   return (

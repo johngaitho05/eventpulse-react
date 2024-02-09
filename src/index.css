@@ -46,18 +46,19 @@ body {
   background-position:center;
 }
 
-.sidenav {
-  .ant-menu-submenu-title{
-    font-size: 1rem;
-  }
-  .ant-menu-item{
-    font-size: .9rem;
-  }
-  .ant-menu-item:hover, .ant-menu-item-selected, .ant-btn-default:hover {
-    color: #ea3b3b !important;
-  }
+.sidenav  .ant-menu-submenu-title{
+  font-size: 1rem;
+}
+.sidenav .ant-menu-item{
+  font-size: .9rem;
+}
+.sidenav .ant-menu-item:hover, .sidenav .ant-menu-item-selected, .sidenav .ant-btn-default:hover {
+  color: #ea3b3b !important;
 }
 
+.ant-btn:not(.ant-dropdown-trigger) {
+  background-color: #1677ff;
+}
 
 @layer utilities {
   @variants responsive {

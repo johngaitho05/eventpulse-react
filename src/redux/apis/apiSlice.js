@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const baseUrl = 'https://events.johngaitho.info/api/v1';
-// const  baseUrl = 'http://localhost:5000/api/v1'
+// const baseUrl = 'https://events.johngaitho.info/api/v1';
+const  baseUrl = 'http://localhost:5000/api/v1'
 
 export const createRequest = (url, method = 'GET', body = {}, is_form=false) => {
     let req = { url, method: method, formData: is_form};
@@ -28,6 +28,7 @@ export const apiSlice = createApi({
         }),
         getVenues: builder.query({
             query: () => createRequest(`/venues`),
+            providesTags: ['venuesList']
         }),
         getEvents: builder.query({
             query: () => createRequest(`/events`),
@@ -54,6 +55,12 @@ export const apiSlice = createApi({
             async onQueryStarted(body , { dispatch }) {
                 dispatch(apiSlice.util.invalidateTags(['EventDetails']))
             },
+        }),
+        createVenue: builder.mutation({
+            query: (body)=> createRequest(`/venues`, 'POST', body),
+            async onQueryStarted(body , { dispatch }) {
+                dispatch(apiSlice.util.invalidateTags(['venuesList']))
+            },
         })
     }),
 });
@@ -68,5 +75,6 @@ export const {
     useCreateEventMutation,
     useGetEventDetailsQuery,
     useRegisterAttendeeMutation,
-    useDeRegisterAttendeeMutation
+    useDeRegisterAttendeeMutation,
+    useCreateVenueMutation
 } = apiSlice;
