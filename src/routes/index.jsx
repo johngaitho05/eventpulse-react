@@ -10,6 +10,7 @@ import OverviewPage from '../pages/OverviewPage.jsx';
 import NewVenue from "../pages/NewVenue.jsx";
 import {getUser} from "../helpers/utils.js";
 import NotFound from "../pages/404.jsx";
+import EditEvent from "../pages/EditEvent.jsx";
 
 const PrivateRoutes = () => {
     const user = getUser()
@@ -41,6 +42,7 @@ const Index = () => {
                   <Route path="/dashboard" element={<OverviewPage />} />
                   <Route path="/dashboard/new-event" element={<NewEvent />} />
                   <Route path="/dashboard/new-venue" element={<NewVenue />} />
+                  <Route path="/dashboard/my-events/:id" element={<EditEvent />} />
               </Route>
           </Routes>
       </div>

@@ -8,8 +8,8 @@ const Hero = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <div className="relative w-full hero-section z-0 mx-auto  h-[30dvh] lg:h-[63dvh]">
-                <div className="absolute w-full bottom-0 left-0 right-0 z-0 wavy ">
+            <div className="relative w-full hero-section z-0 mx-auto  h-[30dvh] lg:h-[50dvh]">
+                <div className="absolute w-full bottom-0 left-0 right-0 z-0 wavy">
                     <img src={wave6} alt="" className="w-full object-cover mb-[-10px] z-0" />
                 </div>
             </div>
@@ -37,7 +37,7 @@ const Hero = () => {
                             key={hero.name}
                             className="flex flex-col w-full items-center justify-start gap-4"
                         >
-                            <div className="h-[100px] w-[100px] rounded-[50%]  bg-light flex items-center border-2 border-black-100 justify-center">
+                            <div className="h-[100px] w-[100px] rounded-[50%] bg-transparent flex items-center border-2 border-black-100 justify-center">
                                 <hero.icon size="32" />
                             </div>
 

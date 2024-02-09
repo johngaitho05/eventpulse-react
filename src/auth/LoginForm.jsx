@@ -39,14 +39,14 @@ const LoginForm = () => {
           </div>
 
           <Form layout="vertical" form={form} onFinish={handleSubmit}>
-              <Form.Item name="email" label="Email" required="true" rules={[{
+              <Form.Item name="email" label="Email"  rules={[{
                   required: true,
                   type: "email",
                   message: 'Please enter a valid email'
               }]}>
                   <Input placeholder="Your email" className="w-full h-[40px]"/>
               </Form.Item>
-              <Form.Item name="password" label="Password" required="true"
+              <Form.Item name="password" label="Password"
                          rules={[{
                              required: true,
                              message: 'Please input your password'

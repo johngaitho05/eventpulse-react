@@ -37,7 +37,7 @@ const items = [
 const SideNav = () => {
   const user = getUser()
   const navigate = useNavigate();
-  const loc = window.location.pathname.split('dashboard/')[1] || 'overview'
+  const loc = window.location.pathname.split('/')[2] || 'overview'
   const onClick = (menu) => {
     if (menu.key === 'logout'){
       localStorage.removeItem('user')

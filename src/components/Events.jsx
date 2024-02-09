@@ -47,11 +47,12 @@ const Events = ({ simplified, nosearch }) => {
                     </div>
                 </div>
             )}
-            <div className="grid grid-cols-1 py-5 sm:grid-cols-2 md:grid-cols-4 mx-auto w-fit">
+            <div className="grid grid-cols-1 mt-4 py-5 sm:grid-cols-2 md:grid-cols-4 mx-auto w-fit gap-10">
                 {events?.map((event) => (
                     <Event event={event} key={event.id} />
                 ))}
                 {isFetching ? <EventLoader count={8} /> : ''}
+                {!isFetching && !events?.length && <h1 className="w-full text-left text-3xl">No events found</h1>}
             </div>
         </div>
     );

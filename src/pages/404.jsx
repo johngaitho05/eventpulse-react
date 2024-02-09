@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, Result } from 'antd';
 import { Link } from 'react-router-dom';
+import {getUser} from "../helpers/utils.js";
+
+const user = getUser()
 const App = () => (
   <Result
     status="404"
@@ -9,7 +12,7 @@ const App = () => (
     extra={
     <div>
       <Link to="/"><Button type="primary">Back Home</Button></Link>
-      <Link className="pl-2"  to="/dashboard"><Button type="primary">Dashboard</Button></Link>
+      {user && <Link className="pl-2"  to="/dashboard"><Button type="primary">Dashboard</Button></Link>}
     </div>
   }
   />

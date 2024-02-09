@@ -50,7 +50,6 @@ const RegistrationForm = () => {
                 <Form.Item
                     name="name"
                     label="Name"
-                    required="true"
                     rules={[{ required: true, message: 'Please input your name' }]}
                 >
                     <Input placeholder="Your full name" className="w-full h-[40px]" />
@@ -58,7 +57,6 @@ const RegistrationForm = () => {
                 <Form.Item
                     name="email"
                     label="Email"
-                    required="true"
                     rules={[
                         { required: true, type: 'email', message: 'Please enter a valid email' },
                     ]}
@@ -68,7 +66,6 @@ const RegistrationForm = () => {
                 <Form.Item
                     name="phone"
                     label="Phone Number"
-                    required="true"
                     rules={[{ required: true, message: 'Please input your phone number' }]}
                 >
                     <Input placeholder="Your phone number" className="w-full h-[40px]" />
@@ -76,7 +73,6 @@ const RegistrationForm = () => {
                 <Form.Item
                     name="password"
                     label="Password"
-                    required="true"
                     rules={[{ required: true, message: 'Please input your password' }]}
                     hasFeedback
                 >

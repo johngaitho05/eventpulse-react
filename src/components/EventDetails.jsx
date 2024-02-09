@@ -8,7 +8,7 @@ import { EventHighlightLoader, EventContentLoader, EventOrganizerLoader } from '
 import {formatDate, getUser} from '../helpers/utils'
 import {DoneOutlined} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
-import {LoadingOutlined} from "@ant-design/icons";
+import {EditOutlined, LoadingOutlined} from "@ant-design/icons";
 import {Spin} from "antd";
 
 const Event = ({eventId}) => {
@@ -65,20 +65,29 @@ const Event = ({eventId}) => {
                         <p>{event?.venue_id?.address}</p>
                     </span>
           </div>
-          <div
-            className="w-full sm:w-1/2 flex justify-center  items-center mt-5 sm:mt-0">
-            {registered ?
-              <button className="bg-gray-600 px-4 py-2 text-white" onClick={handleRegister}>
-                {deRegisterLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>: <><DoneOutlined/> Registered</>}
-              </button>
+          {
+            user && event?.user_id?.id === user.id ?
+              <div
+                className="w-full sm:w-1/2 flex justify-center  items-center mt-5 sm:mt-0">
+                <button className="bg-gray-800 px-4 py-2 text-white" onClick={()=>{navigate(`/dashboard/my-events/${event?.id}`)}}>
+                  <EditOutlined/> Edit
+                </button>
+              </div>
               :
-              <button onClick={handleRegister}
-                      className="w-[200px] font-medium text-white uppercase py-3 px-5 border-0 bg-primary">
-                {registerLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>:  'Register'}
-              </button>
-
-            }
-          </div>
+              <div
+                className="w-full sm:w-1/2 flex justify-center  items-center mt-5 sm:mt-0">
+                {registered ?
+                  <button className="bg-gray-600 px-4 py-2 text-white" onClick={handleRegister}>
+                    {deRegisterLoading ? <Spin indicator={<LoadingOutlined style={{fontSize: 24}} spin/>}/> : <><DoneOutlined/> Registered</>}
+                  </button>
+                  :
+                  <button onClick={handleRegister}
+                          className="w-[200px] font-medium text-white uppercase py-3 px-5 border-0 bg-primary">
+                    {registerLoading ? <Spin indicator={<LoadingOutlined style={{fontSize: 24}} spin/>}/> : 'Register'}
+                  </button>
+                }
+              </div>
+          }
         </div>
       }
 

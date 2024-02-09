@@ -43,7 +43,7 @@ const data = [
 
 const { Search } = Input;
 
-const Events = () => {
+const Summary = () => {
     const navigate = useNavigate()
     const [user, setUser] = useState(getUser());
     const firstName = user && user.name ? user.name.split(' ')[0] : '';
@@ -171,4 +171,4 @@ const Events = () => {
     );
 };
 
-export default Events;
+export default Summary;
