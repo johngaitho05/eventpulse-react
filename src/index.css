@@ -10,11 +10,13 @@ body {
 
 .hero-section {
   width: 100%;
-  background-image: linear-gradient(rgba(21, 53, 59, 0.5), rgba(9, 28, 42, 0.97)),
-  url(../src/assets/hero.jpg);
+  background-image: linear-gradient(rgb(0 0 0 / 68%), rgb(23 25 38 / 77%)),
+  url(/src/assets/hero.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
+  background-attachment: fixed;
+  background-position-y: -20px;
 }
 
 
@@ -62,6 +64,10 @@ body {
 
 .ant-btn:not(.ant-dropdown-trigger):not(.ant-input-search-button) {
   background-color: #000000;
+}
+
+.align-center {
+  align-items: center;
 }
 
 @layer utilities {

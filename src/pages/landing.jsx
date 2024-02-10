@@ -9,7 +9,7 @@ const Landing = () => {
     return (
         <Layout>
             <Hero />
-            <div className="sm: mt-20 bg-[#001e2b] h-auto py-3">
+            <div className="bg-[#001e2b] relative z-50 pt-20">
                 <Benefits />
                 <Slider />
                 <Testimonials />
