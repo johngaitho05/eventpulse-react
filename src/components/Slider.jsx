@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import local from '../assets/venue.jpg';
 import globe from '../assets/globe.jpg';
 import venue from '../assets/events.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Slider = () => {
     const [index, setIndex] = useState(0);
@@ -43,8 +44,10 @@ const Slider = () => {
         return () => clearInterval(interval);
     }, [index]);
 
+    const navigate = useNavigate();
+
     return (
-        <div className="flex bg-[#061621] mt-5 py-2 max-w-[90rem] mx-auto rounded-[8px] p-4 items-center justify-center">
+        <div className="flex bg-[#061621] mt-5 py-2 max-w-[90rem] mx-auto rounded-[8px] p-4 items-center justify-center flex-wrap">
             {/* right */}
 
             <div className="w-full lg:w-1/2">
@@ -57,11 +60,18 @@ const Slider = () => {
                     <li>Create and Manage venues</li>
                     <li>Register to local and International events</li>
                 </ol>
+
+                <button
+                    className="mt-10 mb-10 text-white  border border-primary px-5 py-3 rounded font-semibold transition duration-300 ease-in-out hover:bg-red-600"
+                    onClick={() => navigate('/events')}
+                >
+                    Explore Events
+                </button>
             </div>
 
             {/* slider */}
 
-            <div className="relative w-[400px] h-[400px] overflow-hidden">
+            <div className="relative w-[300px] lg:w-[400px] h-[300px] lg:h-[400px] overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
                     <AnimatePresence custom={index}>
                         {slides.map((slide, i) => (
