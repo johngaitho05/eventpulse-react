@@ -90,9 +90,9 @@ const Slider = () => {
                                 <img
                                     src={slide.image}
                                     alt={slide.alt}
-                                    className="w-full h-full object-cover rounded-full"
+                                    className="w-full h-full object-cover rounded-full object-center"
                                 />
-                                <div className="absolute h-full w-full rounded-full flex items-center justify-center p-4 bg-[rgba(0,0,0,0.6)] bg-opacity-50 text-white text-center font-semibold">
+                                <div className="absolute h-full w-full rounded-full flex items-center justify-center p-4 bg-[rgba(0,0,0,0.5)] bg-opacity-50 text-white text-center font-semibold text-xl">
                                     {slide.text}
                                 </div>
                             </motion.div>
