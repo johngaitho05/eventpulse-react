@@ -7,7 +7,7 @@ const Landing = () => {
     return (
         <Layout>
             <Hero />
-            <div className="sm: mt-20 bg-[#001e2b]  h-screen py-3">
+            <div className="sm: mt-20 bg-[#001e2b] h-auto py-3">
                 <Benefits />
             </div>
         </Layout>
