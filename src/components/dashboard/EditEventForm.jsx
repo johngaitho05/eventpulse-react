@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import {Alert, Button, DatePicker, Form, Input, Select, Spin, Upload} from 'antd';
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
-import {useGetEventDetailsQuery, useGetVenuesQuery, useUpdateEventMutation} from "../../redux/apis/apiSlice.js";
+import {useCreateEventMutation, useGetEventDetailsQuery, useGetVenuesQuery, useUpdateEventMutation} from "../../redux/apis/apiSlice.js";
 import {data} from "autoprefixer";
 import moment from "moment";
+import {formatDate, getUser} from "../../helpers/utils.js";
+import dayjs from 'dayjs'
 
 const { RangePicker } = DatePicker;
+const dateFormat = 'YYYY-MM-DD H:MM:SS';
 
 const EditEventForm = ({eventId}) => {
   const form = Form.useFormInstance();
@@ -27,12 +30,35 @@ const EditEventForm = ({eventId}) => {
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
   const onFinish = async (formData) => {
-
+    setErrorMessage("")
+    setInfoMessage("")
+    const initial = {
+      title: event.title,
+      description: event.description,
+      venue_id: event.venue_id.id,
+      start_date: event.start_date,
+      end_date: event.end_date
+    }
+    if (!formData.banner)
+      delete formData.banner
+    else
+      formData.banner = formData.banner.file.originFileObj
+    formData.start_date = formatDate(formData.dates[0].$d)
+    formData.end_date = formatDate(formData.dates[1].$d)
+    delete formData.dates
+    let form = new FormData()
+    for (let key in formData) {
+      if (formData.hasOwnProperty(key) && formData[key] && formData[key] !== initial[key]) {
+        form.append(key, formData[key]);
+      }
+    }
+    await updateEvent({eventId:eventId, body:form}).then((res)=>{
+      if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
+      else
+        setInfoMessage("Event updated successfully")
+    })
   }
 
-  const onChangeField = (field)=>{
-    console.log(field)
-  }
 
   return (
     <div className="px-4 lg:h-screen max-w-[700px]">
@@ -41,7 +67,7 @@ const EditEventForm = ({eventId}) => {
         initialValues={{
           title: event?.title,
           description: event.description,
-          dates: [moment(event.start_date), moment(event.end_date)],
+          dates: [dayjs(event.start_date), dayjs(event.end_date)],
           venue_id: event.venue_id.id,
 
         }}
@@ -74,7 +100,7 @@ const EditEventForm = ({eventId}) => {
         <Form.Item
           name="banner"
           label="Banner Image"
-          rules={[{required: true, message: 'Please upload the banner image'}]}>
+          rules={[{required: false}]}>
           <Upload
             accept=".jpg, .jpeg, .png"
             maxCount={1}
@@ -82,12 +108,11 @@ const EditEventForm = ({eventId}) => {
             listType="picture-card"
             defaultFileList={[{
               uid: '1',
-              name: 'xxx.png',
+              name: 'banner',
               status: 'done',
               url: event.banner_url,
               percent: 33
-            }]}
-            rules={[{required: true, message: 'Please upload the banner image'}]}>
+            }]}>
             <button type="button">
               <PlusOutlined/>
               <div style={{marginTop: 8}}>Upload</div>

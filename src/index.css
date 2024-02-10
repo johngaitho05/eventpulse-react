@@ -70,6 +70,10 @@ body {
   align-items: center;
 }
 
+.pre-footer {
+  min-height: calc(100dvh - 108px);
+}
+
 @layer utilities {
   @variants responsive {
 

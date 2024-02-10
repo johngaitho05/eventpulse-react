@@ -8,13 +8,12 @@ const Event = ({ event }) => {
     const navigate = useNavigate();
     return (
       <Card
-        className="border-gray-200"
+        className="border-gray-200 w-[320px] p-0"
         hoverable
-        style={{ width: 300 }}
         cover={<img src={CloudinaryImage(event.banner_url)} alt="" className="w-full h-[200px] object-cover "/>}
         onClick={() => navigate(`/events/${event.id}`)}
       >
-          <div className="p-3 flex gap-5 flex-col">
+          <div className="flex gap-5 flex-col p-0">
               <h2 className="font-medium text-xl line-clamp-2">{event.title}</h2>
               <p className="line-clamp-4">{event.description}</p>
               <span className="flex gap-3">

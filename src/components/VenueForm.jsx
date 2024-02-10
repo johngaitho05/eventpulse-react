@@ -22,6 +22,8 @@ const VenueCreationForm = () => {
     }, [countriesList]);
 
     const onFinish = async (formData) => {
+        setErrorMessage("")
+        setInfoMessage("")
         await createVenue(formData).then((res)=>{
             if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
             else

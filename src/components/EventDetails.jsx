@@ -103,8 +103,8 @@ const Event = ({eventId}) => {
                   {event?.description}
                 </p>
                 {
-                  event?.tracks && <h1
-                    className="text-4xl font-medium mt-2 text-gray-600">Topics</h1>
+                  event?.tracks.length ? <h1
+                    className="text-4xl font-medium mt-2 text-gray-600">Topics</h1> : ""
                 }
                 {event?.tracks.map((track, index) => (
                   <div key={index}

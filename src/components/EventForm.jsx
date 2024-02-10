@@ -23,8 +23,8 @@ const EventCreationForm = () => {
     }, [venuesList]);
 
     const onFinish = async (formData) => {
-        if (!user)
-            setErrorMessage("Please login to create an event")
+        setErrorMessage("")
+        setInfoMessage("")
         formData.user_id = user.id
         formData.banner = formData.banner.file.originFileObj
         formData.start_date = formatDate(formData.dates[0].$d)

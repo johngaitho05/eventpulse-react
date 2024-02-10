@@ -45,7 +45,7 @@ export const apiSlice = createApi({
             providesTags: ['getEvents', 'EventDetails'],
         }),
         updateEvent: builder.mutation({
-            query: (data) => createRequest(`/events/${data.eventId}`, 'PUT', data.body),
+            query: (data) => createRequest(`/events/${data.eventId}`, 'PUT', data.body, true),
             providesTags: ['updateEvent'],
             async onQueryStarted(body, { dispatch }) {
                 dispatch(apiSlice.util.invalidateTags(['getEvents']));
