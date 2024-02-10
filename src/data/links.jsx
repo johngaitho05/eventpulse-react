@@ -21,17 +21,25 @@ export const heros = [
     {
         name: 'Conference',
         icon: FaPeopleGroup,
+        message:
+            'Discover, learn, and connect with industry leaders at our cutting-edge conferences. A place where ideas meet execution.',
     },
     {
-        name: 'art exhibition',
+        name: 'Art Exhibition',
         icon: LuCandlestickChart,
+        message:
+            'Immerse yourself in the world of art. Explore exhibitions that showcase contemporary art, photography, and sculptures from emerging and established artists.',
     },
     {
-        name: 'live performance',
+        name: 'Live Performance',
         icon: PiMicrophoneStageLight,
+        message:
+            'Experience the magic of live performances. From captivating concerts to breathtaking theater productions, be ready to be moved and inspired.',
     },
     {
-        name: 'meetup',
+        name: 'Meetup',
         icon: LiaPeopleCarrySolid,
+        message:
+            'Connect with like-minded individuals at our curated meetups. A perfect opportunity to network, share ideas, and create lasting relationships.',
     },
 ];
