@@ -14,17 +14,17 @@ const Hero = () => {
           </div>
           <div className="w-full h-[50dvh] flex justify-between lg:absolute lg:bottom-[-60px] bg-white flex-wrap mt-32 mb-20 lg:mt-0 lg:mb-0 px-5 lg:px-20">
               <div className="w-full lg:w-1/2 flex justify-start flex-col gap-4 px-10 pt-10">
-                  <h1 className="text-xl font-medium text-[#44375f] pr-5 pulsating-text leading-8">
+                  <h1 className="text-xl font-medium text-[#44375f] pr-5 pulsating-text leading-8 mb-4">
                       Discover and Engage with Exciting Events in your area
                   </h1>
                   <button
-                    className="bg-primary font-medium py-3  w-[200px] text-white"
+                    className="bg-primary font-medium py-3  w-[200px] text-white hover:scale-105 hover:bg-red-800"
                     onClick={() => navigate('/events')}
                   >
                       Find your next event
                   </button>
                   <button
-                    className="w-[200px] font-medium text-gray-700 py-3 px-5 border-2 border-primary"
+                    className="w-[200px] font-medium text-gray-700 py-3 px-5 border-2 border-primary hover:bg-primary hover:text-white"
                     onClick={() => navigate('/dashboard/new-event')}
                   >
                       Publish an Event
