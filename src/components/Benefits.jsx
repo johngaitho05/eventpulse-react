@@ -47,7 +47,10 @@ const Benefits = () => {
                     >
                         <div className="flex flex-col gap-2">
                             <div>
-                                <item.icon size="40" className="bg-gray-400 p-2  rounded-full" />
+                                <item.icon
+                                    size="40"
+                                    className="bg-[#001e2b] p-2  rounded-full border"
+                                />
                             </div>
                             <div>
                                 <h2 className="text-xl font-semibold">{item.name}</h2>
