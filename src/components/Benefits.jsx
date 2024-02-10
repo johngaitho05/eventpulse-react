@@ -9,33 +9,32 @@ const Benefits = () => {
     const navigate = useNavigate();
     return (
         <div className="max-w-[90rem] mx-auto py-4 border border-gray-700 px-4 flex flex-col">
-            <p className="text-white my-2 text-2xl font-bold lg:pr-[3rem] w-full">
-                Built for event enthusiasts, by event enthusiasts. Event Pulse - Your go-to platform
-                for seamless event management.
-            </p>
-
             <div className="flex flex-wrap lg:flex-nowrap mt-4 py-5 ">
-                <div className="w-full lg:w-1/2">
-                    <p className="text-white">
-                        Welcome to Event Pulse – Your Ultimate Event Management Solution! From
-                        seamless planning to flawless execution, we've got you covered. Elevate your
-                        events with our powerful tools and expert support. Sign up now to experience
-                        the pulse of successful events!
-                    </p>
+              <div className="w-full lg:w-1/2">
+                <p className="text-white mt-2 mb-8 text-2xl font-bold lg:pr-[3rem] w-full">
+                  Built for event enthusiasts, by event enthusiasts. Event Pulse - Your go-to platform
+                  for seamless event management.
+                </p>
+                <p className="text-white">
+                  Welcome to Event Pulse – Your Ultimate Event Management Solution! From
+                  seamless planning to flawless execution, we've got you covered. Elevate your
+                  events with our powerful tools and expert support. Sign up now to experience
+                  the pulse of successful events!
+                </p>
 
-                    <button
-                        className="mt-10 mb-10 text-white bg-primary px-5 py-3 rounded font-semibold transition duration-300 ease-in-out hover:bg-red-600"
-                        onClick={() => navigate('/register')}
-                    >
-                        Join us today
-                    </button>
-                </div>
-                <div className="w-full lg:w-1/2">
-                    <img
-                        src={dash}
-                        alt="Dashboard"
-                        className="w-full object-cover object-left rounded-[20px]"
-                    />
+                <button
+                  className="mt-10 mb-10 text-white bg-primary px-5 py-3 rounded font-semibold transition duration-300 ease-in-out hover:bg-red-600"
+                  onClick={() => navigate('/register')}
+                >
+                  Join us today
+                </button>
+              </div>
+              <div className="w-full lg:w-1/2">
+                <img
+                  src={dash}
+                  alt="Dashboard"
+                  className="w-full object-cover object-left rounded-[20px]"
+                />
                 </div>
             </div>
 

@@ -1,15 +1,15 @@
 import { CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
 import React, {useEffect, useState} from 'react';
 import {
-  useGetEventDetailsQuery, useRegisterAttendeeMutation, useDeRegisterAttendeeMutation,
+  useGetEventDetailsQuery, useRegisterAttendeeMutation, useDeRegisterAttendeeMutation, useDeleteEventMutation,
 } from "../redux/apis/apiSlice.js";
 
 import { EventHighlightLoader, EventContentLoader, EventOrganizerLoader } from '../globals/eventDetailsLoader'
 import {formatDate, getUser} from '../helpers/utils'
 import {DoneOutlined} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
-import {EditOutlined, LoadingOutlined} from "@ant-design/icons";
-import {Spin} from "antd";
+import {DeleteOutlined, EditOutlined, LoadingOutlined} from "@ant-design/icons";
+import {Alert, Spin} from "antd";
 
 const Event = ({eventId}) => {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ const Event = ({eventId}) => {
   const [registered, setRegistered] = useState(false)
   const [registerUser, { registerLoading }] = useRegisterAttendeeMutation();
   const [deRegisterUser, { deRegisterLoading }] = useDeRegisterAttendeeMutation();
+  const [deleteEvent, { deleteLoading }] = useDeleteEventMutation();
   const [errorMsg, setErrorMessage] = useState("")
 
   useEffect(() => {
@@ -47,6 +48,18 @@ const Event = ({eventId}) => {
     }
   }
 
+  const handleDelete = async () =>{
+    setErrorMessage("")
+    if (event.user_id.id !== user.id) {
+      setErrorMessage("Permission denied!")
+      return
+    }
+    await deleteEvent(event.id).then(function (res){
+      if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
+      else navigate('/events')
+    })
+  }
+
   return (
     <div>
       {
@@ -67,11 +80,18 @@ const Event = ({eventId}) => {
           </div>
           {
             user && event?.user_id?.id === user.id ?
-              <div
-                className="w-full sm:w-1/2 flex justify-center  items-center mt-5 sm:mt-0">
-                <button className="bg-gray-800 px-4 py-2 text-white" onClick={()=>{navigate(`/dashboard/my-events/${event?.id}`)}}>
-                  <EditOutlined/> Edit
-                </button>
+              <div className="w-full sm:w-1/2 mt-5 sm:mt-0 flex flex-col justify-center">
+                <div className="flex justify-start flex-wrap items-center">
+                  <button className="bg-gray-800 px-4 py-2 text-white" onClick={() => {
+                    navigate(`/dashboard/my-events/${event?.id}`)
+                  }}>
+                    <EditOutlined/> Edit
+                  </button>
+                  <button className="bg-red-700 px-4 py-2 text-white ml-4" onClick={handleDelete} disabled={deleteLoading}>
+                    {deleteLoading ? <Spin indicator={<LoadingOutlined style={{fontSize: 24}} spin/>}/> : <><DeleteOutlined/> Delete</>}
+                  </button>
+                </div>
+                {errorMsg && <Alert className="mt-4 max-w-[350px]" message={errorMsg} type="error" />}
               </div>
               :
               <div
