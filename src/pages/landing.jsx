@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../components/hero';
 import Benefits from '../components/Benefits';
 import Layout from './Layout';
+import Slider from '../components/Slider';
 
 const Landing = () => {
     return (
@@ -9,6 +10,7 @@ const Landing = () => {
             <Hero />
             <div className="sm: mt-20 bg-[#001e2b] h-auto py-3">
                 <Benefits />
+                <Slider />
             </div>
         </Layout>
     );
