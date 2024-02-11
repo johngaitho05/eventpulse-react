@@ -2,16 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import {Alert, Button, DatePicker, Form, Input, Select, Spin, Upload} from 'antd';
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
-import {useCreateEventMutation, useGetEventDetailsQuery, useGetVenuesQuery, useUpdateEventMutation} from "../../redux/apis/apiSlice.js";
-import {data} from "autoprefixer";
-import moment from "moment";
+import {useGetEventDetailsQuery, useGetVenuesQuery, useUpdateEventMutation} from "../../redux/apis/apiSlice.js";
 import {formatDate, getUser} from "../../helpers/utils.js";
 import dayjs from 'dayjs'
 
 const { RangePicker } = DatePicker;
-const dateFormat = 'YYYY-MM-DD H:MM:SS';
-
 const EditEventForm = ({eventId}) => {
+  const user = getUser()
   const form = Form.useFormInstance();
   const {data: event} = useGetEventDetailsQuery(eventId)
   const { data: venuesList } = useGetVenuesQuery(null, {skip:!event});
@@ -30,6 +27,10 @@ const EditEventForm = ({eventId}) => {
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
   const onFinish = async (formData) => {
+    if (event.user_id.id !== user.id) {
+      setErrorMessage("Permission Denied!")
+      return
+    }
     setErrorMessage("")
     setInfoMessage("")
     const initial = {

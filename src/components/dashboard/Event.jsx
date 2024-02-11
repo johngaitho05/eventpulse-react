@@ -14,6 +14,10 @@ const Event = ({ event }) => {
   const [errorMsg, setErrorMessage] = useState("")
 
   const handleDelete = async () => {
+    if (event.user_id.id !== user.id) {
+      setErrorMessage("Permission Denied!")
+      return
+    }
     setErrorMessage("")
     if (event.user_id.id !== user.id) {
       setErrorMessage("Permission denied!")
@@ -21,6 +25,7 @@ const Event = ({ event }) => {
     }
     await deleteEvent(event.id).then(function (res) {
       if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
+      else location.reload()
     })
   }
 
@@ -33,6 +38,7 @@ const Event = ({ event }) => {
         <div>
           <span className="p-2 bg-gray-950 text-white font-bold cursor-pointer" onClick={()=>{navigate(`/dashboard/my-events/${event.id}`)}}><EditFilled/></span>
           <span className="p-2 bg-red-600 text-white ml-4 font-bold cursor-pointer" onClick={handleDelete}><DeleteFilled/></span>
+          <span className="float-end">{event?.attendees?.length ? <span className="cursor-pointer hover:underline"><strong>{event?.attendees?.length}</strong> Attendees</span> : '0 Attendees'}</span>
         </div>
         <h2 className="font-medium text-xl line-clamp-2">{event.title}</h2>
         <p className="line-clamp-4">{event.description}</p>
