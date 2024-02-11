@@ -3,8 +3,9 @@ import {CalendarDays, MapPin} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {CloudinaryImage, formatDate, getUser} from '../../helpers/utils.js';
 import {Card} from "antd";
-import {DeleteFilled, EditFilled} from "@ant-design/icons";
+import {DeleteFilled, EditFilled, EyeOutlined} from "@ant-design/icons";
 import {useDeleteEventMutation} from "../../redux/apis/apiSlice.js";
+import {PreviewOutlined, PreviewRounded} from "@mui/icons-material";
 
 const user = getUser()
 
@@ -36,9 +37,11 @@ const Event = ({ event }) => {
     >
       <div className="flex gap-5 flex-col p-0">
         <div>
-          <span className="p-2 bg-gray-950 text-white font-bold cursor-pointer" onClick={()=>{navigate(`/dashboard/my-events/${event.id}`)}}><EditFilled/></span>
-          <span className="p-2 bg-red-600 text-white ml-4 font-bold cursor-pointer" onClick={handleDelete}><DeleteFilled/></span>
-          <span className="float-end">{event?.attendees?.length ? <span className="cursor-pointer hover:underline"><strong>{event?.attendees?.length}</strong> Attendees</span> : '0 Attendees'}</span>
+          <span className="p-2 bg-gray-950 text-white font-bold cursor-pointer" title="Edit" onClick={() => {navigate(`/dashboard/my-events/${event.id}`)}}><EditFilled/></span>
+          <span className="p-2 bg-red-600 text-white ml-4 font-bold cursor-pointer" onClick={handleDelete} title="Delete"><DeleteFilled/></span>
+          <span className="p-2 bg-white border-2 ml-4 font-bold cursor-pointer" onClick={() => {navigate(`/events/${event.id}`)}} title="Preview"><EyeOutlined/></span>
+          <span className="float-end">{event?.attendees?.length ?
+            <span className="cursor-pointer hover:underline"><strong>{event?.attendees?.length}</strong> Attendees</span> : '0 Attendees'}</span>
         </div>
         <h2 className="font-medium text-xl line-clamp-2">{event.title}</h2>
         <p className="line-clamp-4">{event.description}</p>

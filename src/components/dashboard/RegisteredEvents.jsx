@@ -20,7 +20,7 @@ const Events = () => {
 
     return (
       <div className="w-full pt-20">
-          <h1 className="text-2xl">Events you are managing</h1>
+          <h1 className="text-2xl">Events you have registered for</h1>
           <div className="grid grid-cols-1 mt-4 py-5 sm:grid-cols-2 md:grid-cols-4 mx-auto w-fit gap-10">
               {events?.map((event) => (
                 <Event event={event} key={event.id} />
