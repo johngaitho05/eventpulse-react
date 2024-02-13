@@ -121,7 +121,7 @@ const Summary = () => {
                       <div className="flex justify-start gap-4">
                           <div>
                               <ListTodo
-                                className="bg-yellow-400  text-white  p-2 rounded-[20px]"
+                                className="bg-pink-500  text-white  p-2 rounded-[20px]"
                                 size={55}
                               />
                           </div>
@@ -138,7 +138,7 @@ const Summary = () => {
                       <div className="flex justify-start gap-4">
                           <div>
                               <UsersRound
-                                className="bg-yellow-400  text-white  p-2 rounded-[20px]"
+                                className="bg-green-500  text-white  p-2 rounded-[20px]"
                                 size={55}
                               />
                           </div>
