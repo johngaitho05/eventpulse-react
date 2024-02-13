@@ -59,6 +59,6 @@ To access the application open your web browser and navigate to: <http://localho
 
 ![Events](./src/assets/events.png)
 
-![Events](./src/assets/details.png)
+![Event Details](./src/assets/details.png)
 
-![Events](./src/assets/dashboard.png)
+![Dashboard](./src/assets/dashboard.png)
