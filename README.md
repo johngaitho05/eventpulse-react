@@ -85,7 +85,7 @@ Congratulations! You've successfully set up Event Pulse for local development. T
 
 Welcome to **Event Pulse**, the premier platform built by event enthusiasts for event enthusiasts. Our mission is to empower you with seamless event management tools that ensure the planning and execution of your events are flawless. From local gatherings to international conferences, Event Pulse is here to elevate your event experience. Sign up today and join the community of successful event organizers and attendees!
 
-# Authentication on Event Pulse
+# Authentication
 
 Ensuring secure access to Event Pulse is paramount. Our authentication system is designed to protect user accounts and personal information while providing a seamless user experience. Here's how to get started with authentication on our platform.
 
