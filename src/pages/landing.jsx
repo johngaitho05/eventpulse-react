@@ -12,7 +12,7 @@ const Landing = () => {
             <div className="bg-[#001e2b] relative z-50 pt-20">
                 <Benefits />
                 <Slider />
-                <Testimonials />
+                {/* <Testimonials /> */}
             </div>
         </Layout>
     );
