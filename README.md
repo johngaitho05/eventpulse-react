@@ -6,8 +6,6 @@
 
 ## Getting Started
 
-### Prerequisites
-
 # Installation and Local Development
 
 Follow these steps to get your development environment running:
@@ -19,13 +17,6 @@ Clone the Event Pulse repository to your local machine:
 ```bash
 git clone https://github.com/johngaitho05/eventpulse-react.git
 ```
-
-No, the text you provided does not look like markdown. It appears to be a mixture of code snippets and plain text without proper markdown formatting. Markdown is a lightweight markup language with plain text formatting syntax designed for easy conversion to HTML.
-
-To convert the text into markdown format, each section should be properly formatted using markdown syntax. For example:
-
-markdown
-Copy code
 
 # Installation and Local Development
 
@@ -74,18 +65,19 @@ npm run dev
 ```
 
 Using Yarn:
+
 ```bash
 
 yarn run dev
 ```
-## Step 4: Access the Application
-Open your web browser and navigate to:
 
+## Step 4: Access the Application
+
+Open your web browser and navigate to:
 
 <http://localhost:5173/>
 
 Congratulations! You've successfully set up Event Pulse for local development. This setup is ideal for developing new features, fixing bugs, and testing the application before pushing changes to the production environment.
-
 
 ```
 
