@@ -95,7 +95,6 @@ To become a part of the Event Pulse community, follow these simple steps to crea
 
 1. **Navigate to the Sign-Up Page**: Visit our website and click on the "Sign Up" button.
 2. **Fill in Your Details**: Provide the necessary information, including your name, email address, and a secure password.
-3. **Verify Your Email**: After submitting your details, check your email for a verification link. Click on it to verify your account.
 4. **Complete Your Profile**: Log in to your new account and complete your profile by adding any additional information required to enhance your event experience.
 
 ## Sign In
