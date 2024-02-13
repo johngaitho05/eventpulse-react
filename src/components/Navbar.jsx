@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <div
-      className={`w-full fixed top-0 left-0 z-20 ${
+      className={`w-full fixed top-0 left-0 z-20 bg-[#050816] ${
         scrolled ? 'bg-[#050816]' : ' lg:bg-transparent'
       }  ${open ? 'bg-[#050816] lg:bg-transparent' : ' '}`}
     >
