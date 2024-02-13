@@ -14,12 +14,6 @@ cd eventpulse-react
 
 ### Step 2: Install Dependencies
 
-```bash
-cd event-pulse
-```
-
-##### Install the project dependencies
-
 Using npm:
 
 ```bash
