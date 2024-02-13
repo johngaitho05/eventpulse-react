@@ -79,8 +79,6 @@ Open your web browser and navigate to:
 
 Congratulations! You've successfully set up Event Pulse for local development. This setup is ideal for developing new features, fixing bugs, and testing the application before pushing changes to the production environment.
 
-```
-
 # About Event Pulse
 
 # Event Pulse - Your Ultimate Event Management Solution
