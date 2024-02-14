@@ -8,7 +8,7 @@ import {formatDate, getUser} from "../helpers/utils.js";
 const { RangePicker } = DatePicker;
 
 const EventCreationForm = () => {
-    const form = Form.useFormInstance();
+    const [form] = Form.useForm();
     const { data: venuesList, isFetching, isSuccess, isError, error } = useGetVenuesQuery();
     const [user, setUser] = useState(getUser())
     const [venues, setVenues] = useState([]);
@@ -22,24 +22,26 @@ const EventCreationForm = () => {
         );
     }, [venuesList]);
 
-    const onFinish = async (formData) => {
+    const onFinish = async (antData) => {
         setErrorMessage("")
         setInfoMessage("")
-        formData.user_id = user.id
-        formData.banner = formData.banner.file.originFileObj
-        formData.start_date = formatDate(formData.dates[0].$d)
-        formData.end_date = formatDate(formData.dates[1].$d)
-        delete formData.dates
-        let form = new FormData()
-        for (let key in formData) {
-            if (formData.hasOwnProperty(key)) {
-                form.append(key, formData[key]);
+        antData.user_id = user.id
+        antData.banner = antData.banner.file.originFileObj
+        antData.start_date = formatDate(antData.dates[0].$d)
+        antData.end_date = formatDate(antData.dates[1].$d)
+        delete antData.dates
+        let formData = new FormData()
+        for (let key in antData) {
+            if (antData.hasOwnProperty(key)) {
+                formData.append(key, antData[key]);
             }
         }
-        await createEvent(form).then((res)=>{
+        await createEvent(formData).then((res)=>{
             if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
-            else
+            else {
                 setInfoMessage("Event successfully created")
+                form.resetFields()
+            }
         })
     };
 
@@ -104,9 +106,6 @@ const EventCreationForm = () => {
                     filterOption={filterOption}
                     options={venues}
                   />
-              </Form.Item>
-              <Form.Item hidden={true}>
-                  <Input val/>
               </Form.Item>
               <Form.Item>
                   <Button

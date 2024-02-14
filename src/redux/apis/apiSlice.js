@@ -20,6 +20,9 @@ export const apiSlice = createApi({
         register: builder.mutation({
             query: (body) => createRequest('/users', 'POST', body),
         }),
+        getUsers: builder.query({
+            query: () => createRequest(`/users`),
+        }),
         getUserById: builder.query({
             query: (userId) => createRequest(`/users/${userId}`),
         }),
@@ -40,9 +43,20 @@ export const apiSlice = createApi({
                 dispatch(apiSlice.util.invalidateTags(['getEvents', 'EventList']));
             },
         }),
+        createEventTrack: builder.mutation({
+            query: (data) => createRequest(`/events/${data.eventId}/event_tracks`, 'POST', data.body, true),
+            providesTags: ['createEventTrack'],
+            async onQueryStarted(data, { dispatch }) {
+                dispatch(apiSlice.util.invalidateTags(['getEventDetails']));
+            },
+        }),
         getEventDetails: builder.query({
             query: (eventId) => createRequest(`/events/${eventId}`),
-            providesTags: ['getEvents', 'EventDetails'],
+            providesTags: ['getEventDetails'],
+        }),
+        getEventTrackDetails: builder.query({
+            query: (eventTrackId) => createRequest(`/event_tracks/${eventTrackId}`),
+            providesTags: ['getEventTrackDetails'],
         }),
         updateEvent: builder.mutation({
             query: (data) => createRequest(`/events/${data.eventId}`, 'PUT', data.body, true),
@@ -51,24 +65,38 @@ export const apiSlice = createApi({
                 dispatch(apiSlice.util.invalidateTags(['getEvents']));
             },
         }),
+        updateEventTrack: builder.mutation({
+            query: (data) => createRequest(`/event_tracks/${data.eventTrackId}`, 'PUT', data.body, true),
+            providesTags: ['updateEventTrack'],
+            async onQueryStarted(body, { dispatch }) {
+                dispatch(apiSlice.util.invalidateTags(['getEventDetails, getEventTrackDetails']));
+            },
+        }),
         deleteEvent: builder.mutation({
             query: (eventId) => createRequest(`/events/${eventId}`, 'DELETE'),
-            providesTags: ['updateEvent'],
+            providesTags: ['deleteEvent'],
             async onQueryStarted(body, { dispatch }) {
-                dispatch(apiSlice.util.invalidateTags(['getEvents', 'EventDetails']));
+                dispatch(apiSlice.util.invalidateTags(['getEvents', 'getEventDetails']));
+            },
+        }),
+        deleteEventTrack: builder.mutation({
+            query: (eventTrackId) => createRequest(`/event_tracks/${eventTrackId}`, 'DELETE'),
+            providesTags: ['deleteEventTrack'],
+            async onQueryStarted(body, { dispatch }) {
+                dispatch(apiSlice.util.invalidateTags(['getEventDetails']));
             },
         }),
         registerAttendee: builder.mutation({
             query: (body) => createRequest(`/events/${body.eventId}/users/${body.userId}`, 'POST'),
             async onQueryStarted(body, { dispatch }) {
-                dispatch(apiSlice.util.invalidateTags(['EventDetails']));
+                dispatch(apiSlice.util.invalidateTags(['getEventDetails']));
             },
         }),
         deRegisterAttendee: builder.mutation({
             query: (body) =>
               createRequest(`/events/${body.eventId}/users/${body.userId}`, 'DELETE'),
             async onQueryStarted(body, { dispatch }) {
-                dispatch(apiSlice.util.invalidateTags(['EventDetails']));
+                dispatch(apiSlice.util.invalidateTags(['getEventDetails']));
             },
         }),
         createVenue: builder.mutation({
@@ -83,14 +111,19 @@ export const apiSlice = createApi({
 export const {
     useAuthenticateMutation,
     useRegisterMutation,
+    useGetUsersQuery,
     useGetUserByIdQuery,
     useGetCountriesQuery,
     useGetVenuesQuery,
     useGetEventsQuery,
     useCreateEventMutation,
+    useCreateEventTrackMutation,
     useGetEventDetailsQuery,
+    useGetEventTrackDetailsQuery,
     useUpdateEventMutation,
+    useUpdateEventTrackMutation,
     useDeleteEventMutation,
+    useDeleteEventTrackMutation,
     useRegisterAttendeeMutation,
     useDeRegisterAttendeeMutation,
     useCreateVenueMutation,

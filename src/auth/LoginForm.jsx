@@ -11,7 +11,7 @@ import {LoadingOutlined} from "@ant-design/icons";
 const LoginForm = () => {
     const [authenticateUser, { isLoading }] = useAuthenticateMutation()
     const [error, setError] = useState("")
-    const form = Form.useFormInstance();
+    const [form] = Form.useForm();
 
     const handleSubmit = async (formData) => {
         setError("")

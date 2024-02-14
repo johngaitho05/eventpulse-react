@@ -8,7 +8,7 @@ import {formatDate, getUser} from "../helpers/utils.js";
 const { RangePicker } = DatePicker;
 
 const VenueCreationForm = () => {
-    const form = Form.useFormInstance();
+    const [form] = Form.useForm();
     const { data: countriesList, isFetching, isSuccess, isError, error } = useGetCountriesQuery();
     const [countries, setCountries] = useState(countriesList || []);
     const [createVenue, { isLoading }] = useCreateVenueMutation();
@@ -21,13 +21,15 @@ const VenueCreationForm = () => {
         );
     }, [countriesList]);
 
-    const onFinish = async (formData) => {
+    const onFinish = async (antData) => {
         setErrorMessage("")
         setInfoMessage("")
-        await createVenue(formData).then((res)=>{
+        await createVenue(antData).then((res)=>{
             if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
-            else
+            else {
                 setInfoMessage("Venue successfully created")
+                form.resetFields()
+            }
         })
     };
 

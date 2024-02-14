@@ -13,6 +13,8 @@ import NotFound from "../pages/404.jsx";
 import EditEvent from "../pages/EditEvent.jsx";
 import UserEvents from "../pages/UserEvents.jsx";
 import RegisteredEvents from "../pages/RegisteredEvents.jsx";
+import NewEventTrack from "../pages/NewEventTrack.jsx";
+import EditEventTrack from "../pages/EditEventTrack.jsx";
 
 const PrivateRoutes = () => {
     const user = getUser()
@@ -43,6 +45,8 @@ const Index = () => {
               <Route element={<PrivateRoutes />}>
                   <Route path="/dashboard" element={<OverviewPage />} />
                   <Route path="/dashboard/new-event" element={<NewEvent />} />
+                  <Route path="/dashboard/new-event-track" element={<NewEventTrack />} />
+                  <Route path="/dashboard/edit-event-track/:id" element={<EditEventTrack />} />
                   <Route path="/dashboard/new-venue" element={<NewVenue />} />
                   <Route path="/dashboard/my-events" element={<UserEvents />} />
                   <Route path="/dashboard/registered-events" element={<RegisteredEvents />} />

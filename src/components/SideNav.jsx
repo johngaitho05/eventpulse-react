@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import {GlobalOutlined, LikeOutlined, LogoutOutlined} from "@ant-design/icons";
+import {BranchesOutlined, GlobalOutlined, LikeOutlined, LogoutOutlined} from "@ant-design/icons";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import EventIcon from '@mui/icons-material/Event';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
@@ -22,6 +22,7 @@ const items = [
   getItem('Overview', 'overview', <DashboardIcon/>),
   getItem('Events', 'events', <EventIcon/>, [
     getItem('Create Event', 'new-event', <EditCalendarIcon/>),
+    getItem('Create Event Track', 'new-event-track', <BranchesOutlined/>),
     getItem('Create Venue', 'new-venue', <House/>),
     getItem('My Events', 'my-events', <TbCalendarUser/>),
     getItem('Registered Events', 'registered-events', <DoneOutlined/>),
