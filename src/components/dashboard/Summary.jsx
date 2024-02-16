@@ -243,9 +243,9 @@ const Summary = () => {
             {/* Actions */}
             <Card className="mt-5 h-auto">
                 <h2 className="py-2 text-lg">Quick Actions</h2>
-                <div className="flex  gap-4 pt-5">
+                <div className="flex  gap-4 pt-5 flex-wrap">
                     <button
-                        className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2"
+                        className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2 w-full lg:w-auto"
                         onClick={() => {
                             navigate('/dashboard/new-venue');
                         }}
@@ -255,7 +255,7 @@ const Summary = () => {
                     </button>
 
                     <button
-                        className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2"
+                        className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2  w-full lg:w-auto"
                         onClick={() => {
                             navigate('/dashboard/new-event');
                         }}
