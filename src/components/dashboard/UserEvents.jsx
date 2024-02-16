@@ -6,7 +6,7 @@ import {getUser} from "../../helpers/utils.js";
 
 const user = getUser()
 
-const Events = ({ simplified, nosearch }) => {
+const Events = () => {
     let { data: eventsList, isFetching, isSuccess, isError, error } = useGetEventsQuery();
 
     const [events, setEvents] = useState(eventsList);

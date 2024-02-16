@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import {CalendarDays, MapPin} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {CloudinaryImage, formatDate, getUser} from '../../helpers/utils.js';
-import {Card} from "antd";
+import {Card, Modal} from "antd";
 import {DeleteFilled, EditFilled, EyeOutlined} from "@ant-design/icons";
 import {useDeleteEventMutation} from "../../redux/apis/apiSlice.js";
-import {PreviewOutlined, PreviewRounded} from "@mui/icons-material";
 
 const user = getUser()
 
@@ -13,6 +12,30 @@ const Event = ({ event }) => {
   const navigate = useNavigate();
   const [deleteEvent, { deleteLoading }] = useDeleteEventMutation();
   const [errorMsg, setErrorMessage] = useState("")
+  const [isModalOpen, setIsModalOpen] = useState([false, false]);
+
+  const modalStyles = {
+    header: {
+      borderRadius: 0,
+      paddingInlineStart: 5,
+    },
+    mask: {
+      backdropFilter: 'blur(10px)',
+    },
+    content: {
+      boxShadow: '0 0 30px #999',
+    },
+    body: {
+      padding: '1rem'
+    }
+  };
+
+  const toggleModal = (idx, target) => {
+    setIsModalOpen((p) => {
+      p[idx] = target;
+      return [...p];
+    });
+  };
 
   const handleDelete = async () => {
     if (event.user_id.id !== user.id) {
@@ -41,7 +64,7 @@ const Event = ({ event }) => {
           <span className="p-2 bg-red-600 text-white ml-4 font-bold cursor-pointer" onClick={handleDelete} title="Delete"><DeleteFilled/></span>
           <span className="p-2 bg-white border-2 ml-4 font-bold cursor-pointer" onClick={() => {navigate(`/events/${event.id}`)}} title="Preview"><EyeOutlined/></span>
           <span className="float-end">{event?.attendees?.length ?
-            <span className="cursor-pointer hover:underline"><strong>{event?.attendees?.length}</strong> Attendees</span> : '0 Attendees'}</span>
+            <span className="cursor-pointer hover:underline" onClick={() => toggleModal(0, true)}><strong>{event?.attendees?.length}</strong> Attendees</span> : '0 Attendees'}</span>
         </div>
         <h2 className="font-medium text-xl line-clamp-2">{event.title}</h2>
         <p className="line-clamp-4">{event.description}</p>
@@ -54,6 +77,19 @@ const Event = ({ event }) => {
                     <p>{event.venue_id.address}</p>
                 </span>
       </div>
+      <Modal
+        className="lg: min-w-[500px]"
+        title={`Event Attendees - ${event.title}`}
+        open={isModalOpen[0]}
+        onOk={() => toggleModal(0, false)}
+        onCancel={() => toggleModal(0, false)}
+        footer=""
+        styles={modalStyles}
+      >
+        <ol className="list-decimal lg-min">
+          {event?.attendees.map((user)=> (<li><strong>{user.name}</strong> - {user.email} | {user.phone}</li>))}
+        </ol>
+      </Modal>
     </Card>
   );
 };
