@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { formatDate, getUser } from '../../helpers/utils';
-import { Card, Form, Upload } from 'antd';
-import { Input } from 'antd';
+import { getUser } from '../../helpers/utils';
+import { Card } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
     CalendarClock,
@@ -12,43 +11,27 @@ import {
     Plus,
     UsersRound,
 } from 'lucide-react';
-import { CalendarMonth, CalendarMonthOutlined } from '@mui/icons-material';
 import { useGetEventsQuery } from '../../redux/apis/apiSlice.js';
+import Skeleton from "@mui/material/Skeleton";
+import * as React from "react";
+import Box from "@mui/material/Box";
 
-// const data = [
-//     {
-//         icon: CalendarClock,
-//         name: 'past events',
-//         color: 'bg-primary',
-//         count: 4,
-//     },
-//     {
-//         icon: CalendarDays,
-//         name: 'Upcoming events',
-//         color: 'bg-yellow-400',
-//         count: 4,
-//     },
-//     {
-//         icon: ListTodo,
-//         name: 'All events',
-//         color: 'bg-purple-400',
-//         count: 4,
-//     },
-//     {
-//         icon: UsersRound,
-//         name: 'Registered Users',
-//         color: 'bg-red-700',
-//         count: 4,
-//     },
-// ];
-
-const { Search } = Input;
+const CardLoader = () => {
+    return (
+      <Box className="w-[250px] h-[100px] flex justify-start gap-2 items-center bg-white px-4 border-[1px] rounded-md border-gray-100">
+          <Skeleton animation="wave" width={80} height={120} className="bg-gray-600 rounded-[20px]"/>
+          <div>
+              <Skeleton animation="wave" width={80} height={50} className="bg-gray-600"/>
+              <Skeleton animation="wave" width={150} height={30} className="bg-gray-600"/>
+          </div>
+      </Box>
+    )
+}
 
 const Summary = () => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(getUser());
-    const [data, setData] = useState({});
-    const firstName = user && user.name ? user.name.split(' ')[0] : '';
+    const user = getUser()
+    const [data, setData] = useState(null);
     let { data: eventsList, isFetching, isSuccess, isError, error } = useGetEventsQuery();
 
     useEffect(() => {
@@ -72,8 +55,8 @@ const Summary = () => {
                 return new Date(event.start_date) > new Date();
             });
             const registered_users = user_events.reduce(
-                (accumulator, event) => accumulator + event.attendees.length,
-                0
+              (accumulator, event) => accumulator + event.attendees.length,
+              0
             );
             setData({
                 user_events,
@@ -88,17 +71,17 @@ const Summary = () => {
     }, [eventsList]);
 
     return (
-        <div className="flex flex-col  gap-4">
-            {/* managing */}
-            <div>
-                <h2 className="py-2 text-lg">Events you are managing</h2>
-                <div className="flex justify-between flex-wrap gap-4">
+      <div className="flex flex-col  gap-4">
+          <div>
+              <h2 className="py-2 text-lg">Events you are managing</h2>
+              <div className="flex justify-between flex-wrap gap-4">
+                  { data ?
                     <Card className="w-full md:w-[250px] h-[100px]   ">
                         <div className="flex justify-start gap-4">
                             <div>
                                 <CalendarClock
-                                    className="bg-primary  text-white  p-2 rounded-[20px]"
-                                    size={55}
+                                  className="bg-primary  text-white  p-2 rounded-[20px]"
+                                  size={55}
                                 />
                             </div>
 
@@ -110,12 +93,14 @@ const Summary = () => {
                             </div>
                         </div>
                     </Card>
+                    : <CardLoader/>}
+                  { data ?
                     <Card className="w-full md:w-[250px] h-[100px]    ">
                         <div className="flex justify-start gap-4 ">
                             <div>
                                 <CalendarDays
-                                    className="bg-yellow-400  text-white  p-2 rounded-[20px]"
-                                    size={55}
+                                  className="bg-yellow-400  text-white  p-2 rounded-[20px]"
+                                  size={55}
                                 />
                             </div>
 
@@ -127,12 +112,14 @@ const Summary = () => {
                             </div>
                         </div>
                     </Card>
+                    : <CardLoader/>}
+                  { data ?
                     <Card className="w-full md:w-[250px] h-[100px]   ">
                         <div className="flex justify-start gap-4">
                             <div>
                                 <ListTodo
-                                    className="bg-pink-500  text-white  p-2 rounded-[20px]"
-                                    size={55}
+                                  className="bg-pink-500  text-white  p-2 rounded-[20px]"
+                                  size={55}
                                 />
                             </div>
 
@@ -142,12 +129,14 @@ const Summary = () => {
                             </div>
                         </div>
                     </Card>
+                    : <CardLoader/>}
+                  { data ?
                     <Card className="w-full md:w-[250px] h-[100px]   ">
                         <div className="flex justify-start gap-4">
                             <div>
                                 <UsersRound
-                                    className="bg-green-500  text-white  p-2 rounded-[20px]"
-                                    size={55}
+                                  className="bg-green-500  text-white  p-2 rounded-[20px]"
+                                  size={55}
                                 />
                             </div>
 
@@ -159,20 +148,22 @@ const Summary = () => {
                             </div>
                         </div>
                     </Card>
-                </div>
-            </div>
+                    : <CardLoader/>}
+              </div>
+          </div>
 
-            {/* Registered */}
-            <div className="flex justify-between align-middle mt-4 py-2 gap-5  flex-wrap lg:flex-nowrap ">
-                <Card className=" w-full lg:w-1/2 py-2">
-                    <h2 className="pb-5 text-lg">Events you Registered for</h2>
-                    <div className="flex justify-between w-full flex-wrap gap-4">
+          {/* Registered */}
+          <div className="flex justify-between align-middle mt-4 py-2 gap-5  flex-wrap lg:flex-nowrap ">
+              <Card className=" w-full lg:w-1/2 py-2">
+                  <h2 className="pb-5 text-lg">Events you Registered for</h2>
+                  <div className="flex justify-between w-full flex-wrap gap-4">
+                      { data ?
                         <Card className="w-full md:w-[250px] h-[100px]   ">
                             <div className="flex justify-start gap-4 ">
                                 <div>
                                     <CalendarClock
-                                        className="bg-primary text-white p-2 rounded-[20px]"
-                                        size={55}
+                                      className="bg-primary text-white p-2 rounded-[20px]"
+                                      size={55}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -183,12 +174,14 @@ const Summary = () => {
                                 </div>
                             </div>
                         </Card>
+                        : <CardLoader/>}
+                      { data ?
                         <Card className="w-full md:w-[250px] h-[100px]   ">
                             <div className="flex justify-start gap-4">
                                 <div>
                                     <CalendarDays
-                                        className="bg-yellow-400 text-white p-2 rounded-[20px]"
-                                        size={55}
+                                      className="bg-yellow-400 text-white p-2 rounded-[20px]"
+                                      size={55}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -201,17 +194,19 @@ const Summary = () => {
                                 </div>
                             </div>
                         </Card>
-                    </div>
-                </Card>
-                <Card className=" w-full lg:w-1/2 py-2">
-                    <h2 className="pb-5 text-lg">Recommended Events</h2>
-                    <div className="w-full flex justify-between flex-wrap gap-4">
+                        : <CardLoader/>}
+                  </div>
+              </Card>
+              <Card className=" w-full lg:w-1/2 py-2">
+                  <h2 className="pb-5 text-lg">Recommended Events</h2>
+                  <div className="w-full flex justify-between flex-wrap gap-4">
+                      { data ?
                         <Card className="w-full md:w-[250px] h-[100px]   ">
                             <div className="flex justify-start gap-4">
                                 <div>
                                     <MapPin
-                                        className="bg-gray-600 text-white p-2 rounded-[20px]"
-                                        size={55}
+                                      className="bg-gray-600 text-white p-2 rounded-[20px]"
+                                      size={55}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -220,12 +215,14 @@ const Summary = () => {
                                 </div>
                             </div>
                         </Card>
+                        : <CardLoader/>}
+                      { data ?
                         <Card className="w-full md:w-[250px] h-[100px]   ">
                             <div className="flex justify-start gap-4">
                                 <div>
                                     <Globe
-                                        className="bg-blue-400 text-white p-2 rounded-[20px]"
-                                        size={55}
+                                      className="bg-blue-400 text-white p-2 rounded-[20px]"
+                                      size={55}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -236,36 +233,37 @@ const Summary = () => {
                                 </div>
                             </div>
                         </Card>
-                    </div>
-                </Card>
-            </div>
+                        : <CardLoader/>}
+                  </div>
+              </Card>
+          </div>
 
-            {/* Actions */}
-            <Card className="mt-5 h-auto">
-                <h2 className="py-2 text-lg">Quick Actions</h2>
-                <div className="flex  gap-4 pt-5 flex-wrap">
-                    <button
-                        className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2 w-full lg:w-auto"
-                        onClick={() => {
-                            navigate('/dashboard/new-venue');
-                        }}
-                    >
-                        <Plus className="border  p-2" size={40} />
-                        Create Venue
-                    </button>
+          {/* Actions */}
+          <Card className="mt-5 h-auto">
+              <h2 className="py-2 text-lg">Quick Actions</h2>
+              <div className="flex  gap-4 pt-5 flex-wrap">
+                  <button
+                    className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2 w-full lg:w-auto"
+                    onClick={() => {
+                        navigate('/dashboard/new-venue');
+                    }}
+                  >
+                      <Plus className="border  p-2" size={40} />
+                      Create Venue
+                  </button>
 
-                    <button
-                        className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2  w-full lg:w-auto"
-                        onClick={() => {
-                            navigate('/dashboard/new-event');
-                        }}
-                    >
-                        <Plus className="border  p-2" size={40} />
-                        Create Event
-                    </button>
-                </div>
-            </Card>
-        </div>
+                  <button
+                    className="px-10 py-8  border-2 border-dashed border-black rounded flex flex-col items-center gap-2  w-full lg:w-auto"
+                    onClick={() => {
+                        navigate('/dashboard/new-event');
+                    }}
+                  >
+                      <Plus className="border  p-2" size={40} />
+                      Create Event
+                  </button>
+              </div>
+          </Card>
+      </div>
     );
 };
 
