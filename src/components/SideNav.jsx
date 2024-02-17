@@ -38,8 +38,7 @@ const items = [
     getItem('logout', 'logout', <LogoutOutlined />),
 ];
 
-const SideNav = () => {
-    const [open, setOpen] = useState(false);
+const SideNav = ({ setOpen }) => {
     const user = getUser();
     const loc = window.location.pathname.split('/')[2] || 'overview';
     const onClick = (menu) => {
@@ -49,10 +48,6 @@ const SideNav = () => {
         } else {
             window.location = `/dashboard/${menu.key === 'overview' ? '' : menu.key}`;
         }
-    };
-
-    const toggleSidebar = () => {
-        setOpen(!open);
     };
 
     return (
@@ -68,10 +63,13 @@ const SideNav = () => {
             {/*    {open ? <CloseIcon /> : <MenuIcon />}*/}
             {/*</IconButton>*/}
             <div className="min-h-[86vh]">
-                <div className="brand mt-6 mb-6">
+                <div className="brand mt-6 mb-6 flex items-center justify-between">
                     <Link to="/">
                         <img src={Logo} alt="EventPulse" className="w-[180px]" />
                     </Link>
+                    <div className="block lg:hidden" onClick={() => setOpen(false)}>
+                        <MenuIcon className="text-white block " />
+                    </div>
                 </div>
                 <hr />
                 <Menu
