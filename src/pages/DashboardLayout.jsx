@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }) => {
                 </div>
             ) : (
                 <div className="block lg:hidden" onClick={() => setOpen(true)}>
-                    <MenuIcon className="mt-5 ml-3 font-bold " />
+                    <MenuIcon className="mt-5 ml-3 font-bold text-primary " />
                 </div>
             )}
 
