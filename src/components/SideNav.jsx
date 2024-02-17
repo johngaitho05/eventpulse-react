@@ -41,14 +41,13 @@ const items = [
 const SideNav = () => {
     const [open, setOpen] = useState(false);
     const user = getUser();
-    const navigate = useNavigate();
     const loc = window.location.pathname.split('/')[2] || 'overview';
     const onClick = (menu) => {
         if (menu.key === 'logout') {
             localStorage.removeItem('user');
             window.location = '/';
         } else {
-            navigate(`/dashboard/${menu.key === 'overview' ? '' : menu.key}`);
+            window.location = `/dashboard/${menu.key === 'overview' ? '' : menu.key}`;
         }
     };
 
@@ -62,12 +61,12 @@ const SideNav = () => {
             style={{ position: 'absolute', zIndex: 1000 }}
         >
             {/* Toggle Button */}
-            {/* <IconButton
-                onClick={toggleSidebar}
-                style={{ position: 'absolute', top: 10, left: open ? 240 : 10 }}
-            >
-                {open ? <CloseIcon /> : <MenuIcon />}
-            </IconButton> */}
+            {/*<IconButton*/}
+            {/*    onClick={toggleSidebar}*/}
+            {/*    style={{ position: 'absolute', top: 10, left: open ? 240 : 10 }}*/}
+            {/*>*/}
+            {/*    {open ? <CloseIcon /> : <MenuIcon />}*/}
+            {/*</IconButton>*/}
             <div className="min-h-[86vh]">
                 <div className="brand mt-6 mb-6">
                     <Link to="/">
