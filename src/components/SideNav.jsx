@@ -62,12 +62,12 @@ const SideNav = () => {
             style={{ position: 'absolute', zIndex: 1000 }}
         >
             {/* Toggle Button */}
-            <IconButton
+            {/* <IconButton
                 onClick={toggleSidebar}
                 style={{ position: 'absolute', top: 10, left: open ? 240 : 10 }}
             >
                 {open ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
+            </IconButton> */}
             <div className="min-h-[86vh]">
                 <div className="brand mt-6 mb-6">
                     <Link to="/">
