@@ -55,6 +55,8 @@ Copyright 2024. All rights reserved.
 Licensed under the [MIT](https://github.com/ivanagui2/VMQemuVGA/blob/master/LICENSE.txt) License.
 
 ### Screenshots
+![Login Page](./src/assets/login.png)
+
 ![Homepage](./src/assets/homepage.png)
 
 ![Events](./src/assets/events.png)
