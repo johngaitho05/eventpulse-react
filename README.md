@@ -1,5 +1,6 @@
 # Event Pulse
 EventPulse is an event management system built with React JS. It allows users to manage their own events as well as register as attendees to events managed by other users
+- [Hosted Project Link](https://eventpulse.johngaitho.info)
 
 # Installation
 
