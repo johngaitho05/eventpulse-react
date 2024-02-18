@@ -28,6 +28,7 @@ const Event = ({eventId}) => {
 
   useEffect(() => {
     if (event && user){
+      // Am I registered to this event?
       setRegistered(!!event.attendees.find(_user => _user.id === user.id))
     }
   }, [event, user]);
@@ -51,9 +52,11 @@ const Event = ({eventId}) => {
   const handleDelete = async () =>{
     setErrorMessage("")
     if (event.user_id.id !== user.id) {
+      // User can only delete their events
       setErrorMessage("Permission denied!")
       return
     }
+    // Calls delete event API
     await deleteEvent(event.id).then(function (res){
       if (!res?.data) setErrorMessage(res?.error?.data?.error || 'Something went wrong!');
       else navigate('/events')

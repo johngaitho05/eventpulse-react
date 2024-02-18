@@ -15,7 +15,7 @@ const developers = [
         avatar: 'https://res.cloudinary.com/da3jmmlpj/image/upload/v1707828462/yk-transparent_h8rqym.png'
     },
 ];
-
+// Part of landing page
 const ProjectInspiration = () => {
     return (
       <div className="max-w-[90rem] mx-auto p-4 my-10 rounded-[8px] mt-20">
@@ -24,7 +24,7 @@ const ProjectInspiration = () => {
                   <h2 className="text-2xl font-bold mb-4 text-white">The Spark Behind the Project</h2>
                   <p className="text-gray-200 text-md leading-8">
 
-                      The spark for Eventpulse ignited from a passion to connect people through
+                      The spark for EventPulse ignited from a passion to connect people through
                       memorable events. Recognizing the challenges venues and organizers faced in
                       showcasing and discovering events on a global scale, we set out to create a
                       unified platform. Our goal was to simplify the process of finding and

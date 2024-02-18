@@ -5,6 +5,7 @@ import { heros } from '../data/links';
 import { Card } from 'antd';
 import { ChevronRight } from 'lucide-react';
 
+// part of landing page
 const Benefits = () => {
     const navigate = useNavigate();
     return (

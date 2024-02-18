@@ -1,4 +1,4 @@
-// Footer.js
+// Footer
 
 import React from 'react';
 

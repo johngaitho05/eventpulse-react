@@ -7,6 +7,7 @@ import {formatDate, getUser} from "../helpers/utils.js";
 
 const user = getUser()
 
+// Antd form for creating an event track
 const EventTrackCreationForm = () => {
     const [form] = Form.useForm();
     const { data: usersList} = useGetUsersQuery();

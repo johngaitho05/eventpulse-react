@@ -1,10 +1,10 @@
 import React from 'react';
 
 import wave6 from '../assets/wave6.svg';
-import { heros } from '../data/links';
 import { useNavigate } from 'react-router-dom';
 import Gif from '../assets/steps.gif'
 
+// Part of the landing page
 const Hero = () => {
     const navigate = useNavigate();
     return (

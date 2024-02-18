@@ -1,5 +1,5 @@
 
-
+// Converts client date to server date and vice versa
 export const formatDate = (dt,  client=true)=> {
     if (dt instanceof Date){
         let year = dt.getFullYear();
@@ -30,7 +30,7 @@ export const formatDate = (dt,  client=true)=> {
     return inputDate.toLocaleDateString('en-US', options);
 }
 
-
+// Returns the currently logged-in user
 export const getUser = ()=> {
     let user =  localStorage.getItem('user')
     if (user)
@@ -38,6 +38,7 @@ export const getUser = ()=> {
     return null
 }
 
+// Returns the initials of the current user i.e JG if the user's name is John Gaitho
 export const getInitials = ()=> {
     const user = getUser()
     if (!user)

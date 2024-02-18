@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {CloudinaryImage, formatDate} from '../helpers/utils';
 import {Card} from "antd";
 
+// Event Card component
 const Event = ({ event }) => {
     const navigate = useNavigate();
     return (
