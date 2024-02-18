@@ -48,6 +48,11 @@ yarn run dev
 
 To access the application open your web browser and navigate to: <http://localhost:5173>
 
+### Licensing
+Copyright 2024. All rights reserved.
+
+Licensed under the [MIT](https://github.com/ivanagui2/VMQemuVGA/blob/master/LICENSE.txt) License.
+
 ### Screenshots
 ![Homepage](./src/assets/homepage.png)
 
@@ -56,3 +61,11 @@ To access the application open your web browser and navigate to: <http://localho
 ![Event Details](./src/assets/details.png)
 
 ![Dashboard](./src/assets/dashboard.png)
+
+![Create Event](./src/assets/create-event.png)
+
+![Create Event Track](./src/assets/create-event-track.png)
+
+![My Events](./src/assets/my-events.png)
+
+![Event Attendees](./src/assets/event-attendees.png)
