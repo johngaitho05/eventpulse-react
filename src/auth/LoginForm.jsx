@@ -27,7 +27,7 @@ const LoginForm = () => {
         })
     };
     return (
-      <div className=" h-full px-4 w-full lg:w-[45%] flex flex-col items-center ">
+      <div className=" bg-red-500 h-full px-4 w-full lg:w-[45%] flex flex-col items-center ">
           <div className="flex flex-col justify-center items-center">
               <div>
                   <img src={logo} alt="" className="h-11 object-cover" />
